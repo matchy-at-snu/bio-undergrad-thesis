@@ -1,0 +1,12 @@
+% \thispagestyle{empty}
+\makeatletter
+\begin{spacing}{1.3}
+  \begin{abstract}
+    The Sequence Read Archive currently holds over 60 petabases and representing a treasure trove for medicine and biotechnology. Bloom-filter and sketching based approaches were proposed to accelerate searches, however they offer only limited sensitivity. We developed Petasearch to enable fast and sensitive searching through huge protein databases. Its algorithm contains three stages: (1) We pre-process the database sequences to extract k-mers, sort and store them in a highly compressed k-mer index. (2) We extract query k-mers, add similar k-mers and find matches between query and database k-mers. To maximize throughput, we exploit the caching and prefetch infrastructure of modern CPUs, advanced Linux IO techniques, and the enormous read bandwidth of NVMe-SSDs. (3) We compute SIMD-accelerated banded Smith-Waterman alignments between sequences of high-scoring k-mer matches. With such design, Petasearch is proved to have great efficiency: it is up to 190 times faster than state-of-the-art algorithms on a 9.3TB benchmark. At much accelerated speeds, Petasearch matches state-of-the-art algorithms on sensitivity down to sequence identities of 60\%. On a SCOP25 benchmark we showed that Petasearch’s profile search detects sequence homology down to 40\% sequence identity. We also showed that Petasearch can be applied in finding novel Cas family proteins and discovering new RNA-dependent RNA polymerase (RdRP) homologs. In conclusion, Petasearch is a tool with huge potential. It will enable fast querying of current and upcoming databases and bring bioinformatic researches to a larger scale.
+  \end{abstract}
+  \dotfill\\
+  \textbf{Keywords: } Sequence analysis, Sequence search, Protein databases, Proteins, Protein profiles, Large-scale annotation \\
+  \textbf{Student ID: }\@studentid \\
+\end{spacing}
+\makeatother
+\vfill

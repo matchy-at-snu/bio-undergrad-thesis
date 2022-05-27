@@ -1,0 +1,227 @@
+\documentclass[11pt]{report}
+\usepackage[
+    a4paper,
+    top=20mm,
+    right=30mm,
+    left=30mm,
+    footskip=15mm,
+    bottom=30mm
+]{geometry}
+\usepackage{kotex} % Korean support
+\usepackage{datetime2}
+\usepackage{setspace} % Set spacing
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{subfiles}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage[
+  backend=biber,
+  style=apa
+]{biblatex}
+\usepackage[indent=0pt]{parskip}
+
+\addbibresource{ref.bib}
+
+%%
+%% Set up footer style
+%%
+% \usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}% Remove header rule
+\fancyhead{}
+\fancyfoot[C]{-\ \thepage\ -}
+
+%%
+%% Set up font sizes
+%%
+\makeatletter
+\renewcommand\LARGE{\@setfontsize\LARGE{22pt}{18}}
+\renewcommand\Large{\@setfontsize\Large{16pt}{18}}
+\renewcommand\large{\@setfontsize\large{14pt}{18}}
+\makeatother
+
+%%
+%% Define alternative (Korean) title macro
+%%
+\makeatletter
+\let\@oldtitle=\title
+\renewcommand{\title}{
+  \@ifstar{\@kor@title}{\@oldtitle}
+}
+\newcommand{\@kor@title}[1]{%
+  \renewcommand{\@titlealt}{#1}
+}%
+\newcommand{\@titlealt}{%
+  \@latex@error{No \noexpand\title* given}\@ehc
+}%
+\makeatother
+
+%%
+%% Define supervisor macro
+%%
+\makeatletter
+\newcommand{\advisor}[1]{%
+  \renewcommand{\@advisor}{#1}
+}%
+\newcommand{\@advisor}{%
+  \@latex@error{No \noexpand\advisor given}\@ehc
+}%
+\makeatother
+
+%%
+%% Define student id macro
+%%
+\makeatletter
+\newcommand{\studentid}[1]{%
+  \renewcommand{\@studentid}{#1}
+}%
+\newcommand{\@studentid}{%
+  \@latex@error{No \noexpand\studentid given}\@ehc
+}%
+\makeatother
+
+%%
+%% Set up Korean datetime format
+%%
+% \usepackage{datetime2}
+\DTMnewdatestyle{kordate}% label
+{% definitions
+  \renewcommand*{\DTMdisplaydate}[4]{%
+    \number##1년 \number##2월 \number##3일
+  }%
+  \renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}
+}%
+\DTMsetdatestyle{kordate}
+
+%%
+%% Set up abstract environment
+%%
+\renewenvironment{abstract}{
+  \Large
+  \begin{center}
+    \textbf{\abstractname}\vspace{0pt}
+  \end{center}
+  \begin{quote}
+  \noindent
+  \normalsize
+}{
+  \end{quote}
+  \endlist
+}
+\newenvironment{abstract*}{
+  \Large
+  \begin{center}
+    \textbf{국문초록}\vspace{0pt}
+  \end{center}
+  \begin{quote}
+  \noindent
+  \normalsize
+}{
+  \end{quote}
+  \endlist
+} % korean
+%%
+
+%%
+%% Set up title styles
+%%
+% \usepackage{titlesec}
+% chapter
+\titleformat{name=\chapter}
+  [block] % shape
+  {\Large\bfseries} % format
+  {\thechapter.} % label
+  {1em} % sep
+  {\vspace{0pt}} % before code
+  [\thispagestyle{fancy}] % after code
+  \titleformat{name=\chapter,numberless}
+  [block]
+  {\Large\bfseries}
+  {}
+  {1em}
+  {\centering}
+  [\vspace{0pt}]
+\titlespacing*{\chapter}
+  {0pt}
+  {-30pt}
+  {\baselineskip}
+
+% section
+\titleformat{name=\section}
+  [block]
+  {\large\bfseries}
+  {\thetitle}
+  {1em}
+  {}
+
+% subsection
+\titleformat{\subsection}
+  [block]
+  {\fontsize{13pt}{14pt}\bfseries}
+  {\thetitle}
+  {1em}
+  {}
+%%
+
+%%
+%% Set up spacing
+%%
+% \usepackage{setspace}
+\SetSinglespace{1.6}
+
+%%
+%% Basic document info
+%%
+\title{Petasearch: Fast, approximate comparison of huge sequence datasets}
+\title*{페타탐색: 방대한 서열 데이터셋에 대해 빠른 유사성 검색}
+
+\author{Minghang Li}
+\advisor{Martin Steinegger}
+\studentid{2018-17232}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Start of Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\subfile{frontmatters/titlepage.tex}
+
+\pagebreak
+
+\subfile{frontmatters/research_ethics.tex}
+
+\pagebreak
+
+\pagenumbering{roman}
+
+\addcontentsline{toc}{chapter}{Abstract}
+
+\subfile{frontmatters/abstract.tex}
+
+\pagebreak
+
+\tableofcontents
+\thispagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
+\pagebreak
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%% Start of chapters
+\subfile{chapters/01_introduction.tex}
+\subfile{chapters/02_materials_and_methods.tex}
+\subfile{chapters/03_results.tex}
+\subfile{chapters/04_discussion.tex}
+
+\pagebreak
+
+\chapter{References}
+\printbibliography
+\thispagestyle{empty}
+
+\end{document}
