@@ -7,6 +7,10 @@
 
 \section{Sequence Databases}
 
+Next generation sequencing (NGS) technologies have revolutionized the way we collect and analyze biological data. Thanks to NGS, the cost of sequencing has dropped drastically and continued to decrease with more new technologies developed. Accompanying this change is the explosive growth of the amount of sequencing data and the size of sequence databases. The Sequence Read Archive (SRA) is one of the most popular and widely used sequence databases that store both private and public sequence reads and provide access in various foramts including the commonly used \texttt{FASTQ} file format. Its size has grown exponentially since 2008 and currently reached more than 60 petabytes large. The growth in size of Sequence Read Archive is visualized in \ref{fig:sra_stat}.
+
+
+
 \section{State-of-the-art Algorithms for Sequence Searches}
 
 \subsection{DIAMOND}
@@ -18,3 +22,13 @@
 \section{Prototype of Petasearch Algorithm}
 
 \section{Motivation and Contribution of the Thesis}
+
+\pagebreak
+
+\thispagestyle{empty}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{images/sra_stat.pdf}
+  \caption{The exponential growth of the Sequence Read Archive from 2008 to 2022. The total amount of sequence data (unit in bases) and publicly available data are visualized in pink and dark red respectively.}
+  \label{fig:sra_stat}
+\end{figure}
