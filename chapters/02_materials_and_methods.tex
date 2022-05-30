@@ -2,4 +2,8 @@
 
 \section{Space Optimization}
 
+As is described in chapter 2, the diff-index created in the k-mer extraction step will store multiple \texttt{USHRT\_MAX} as long as the difference is larger than \texttt{USHRT\_MAX}. This will lead to a huge amount of space consumption, especially when \texttt{k} is large. (fig) showed the space consumption of the diff-index created in the k-mer extraction step when $k = 11$.
+
+In order to
+
 \section{Speed Optimization}
