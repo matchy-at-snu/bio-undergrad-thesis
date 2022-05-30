@@ -166,6 +166,17 @@
 %%
 
 %%
+%% Set up figure environment
+%%
+\newenvironment{figpage}{
+  \clearpage
+  \addtocounter{page}{-1}
+  \thispagestyle{empty}
+    }{
+  \pagebreak
+}
+
+%%
 %% Set up spacing
 %%
 % \usepackage{setspace}
@@ -179,7 +190,7 @@
 
 \author{Minghang Li}
 \advisor{Martin Steinegger}
-\studentid{2018-17232}
+\studentid{2017-17232}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
