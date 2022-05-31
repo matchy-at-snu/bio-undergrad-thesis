@@ -22,7 +22,17 @@
 ]{biblatex}
 \usepackage[indent=0pt]{parskip}
 \usepackage{hyperref}
+\usepackage[nameinlink, capitalise]{cleveref}
+\usepackage{mathpazo}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{etoolbox}
 
+\AtBeginEnvironment{algorithm}{
+  \SetSinglespace{1.1}
+}
 
 \addbibresource{ref.bib}
 
@@ -172,10 +182,12 @@
 %%
 \newenvironment{figpage}{
   \clearpage
+  \SetSinglespace{1.2}
   \addtocounter{page}{-1}
   \thispagestyle{empty}
     }{
-  \pagebreak
+  \SetSinglespace{1.6}
+  \clearpage
 }
 
 %%
