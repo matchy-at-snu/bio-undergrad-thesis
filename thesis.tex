@@ -7,6 +7,7 @@
     footskip=15mm,
     bottom=30mm
 ]{geometry}
+\usepackage{fontspec}
 \usepackage{kotex} % Korean support
 \usepackage{datetime2}
 \usepackage{setspace} % Set spacing
@@ -182,7 +183,7 @@
 %%
 \newenvironment{figpage}{
   \clearpage
-  \SetSinglespace{1.2}
+  \SetSinglespace{1.3}
   \addtocounter{page}{-1}
   \thispagestyle{empty}
     }{
@@ -246,8 +247,9 @@
 
 \pagebreak
 
-\chapter{References}
-\printbibliography
+% \chapter{References}
+
+\printbibliography[heading=bibnumbered, title={References}]
 \thispagestyle{empty}
 
 \end{document}
