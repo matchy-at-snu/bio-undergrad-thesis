@@ -24,23 +24,23 @@ While decoding the compressed diff-index in the process of double-index search, 
 
 \begin{algorithm}[htbp]
   \begin{algorithmic}
-  \Procedure{DecodeKmer}{$currentKmer$, $currentTargetKmerPtr$, $currentTargetIDPtr$}
+    \Procedure{DecodeKmer}{$currentKmer$, $currentTargetKmerPtr$, $currentTargetIDPtr$}
 
-  \State $currentDiffIndex \gets 0$\;
-  % \State $X \gets x$
-  % \State$ $N \gets n$
-  \While{$*currentTargetKmerPtr > 0 $}\Comment{This means the sign bit is not 1. }
+    \State $currentDiffIndex \gets 0$\;
+    % \State $X \gets x$
+    % \State$ $N \gets n$
+    \While{$*currentTargetKmerPtr > 0 $}\Comment{This means the sign bit is not 1. }
     \State $currentDiffIndex \gets\ \textsc{Get15Bits}(*currTargetKmerPtr)$
     \State $currentDiffIndex \gets currentDiffIndex \texttt{ << } 15$
     \State $\textsc{Next}(currTargetKmerPtr)$
-  \EndWhile
-  \State $currentDiffIndex \gets\ \textsc{Get15Bits}(*currTargetKmerPtr)$
-  \State $currentKmer \gets currentKmer + currentDiffIndex$
-  \State $\textsc{Next}(currTargetKmerPtr)$
-  \State $currentTargetIDPtr \gets\ \textsc{Next}(currentTargetIDPtr)$
-  \Return $currentKmer$
-  \EndProcedure
-  \caption{ Pseudocode for the k-mer decoding process} \label{algorithm:decode_kmer}
+    \EndWhile
+    \State $currentDiffIndex \gets\ \textsc{Get15Bits}(*currTargetKmerPtr)$
+    \State $currentKmer \gets currentKmer + currentDiffIndex$
+    \State $\textsc{Next}(currTargetKmerPtr)$
+    \State $currentTargetIDPtr \gets\ \textsc{Next}(currentTargetIDPtr)$
+    \Return $currentKmer$
+    \EndProcedure
+    \caption{ Pseudocode for the k-mer decoding process} \label{algorithm:decode_kmer}
   \end{algorithmic}
 \end{algorithm}
 
@@ -49,15 +49,15 @@ While decoding the compressed diff-index in the process of double-index search, 
   \begin{figure}
     \centering
     \includegraphics[width=.8\textwidth]{images/k11_space_consumption.pdf}
-  \captionof{figure}{Visualizaiton of k-mer table and ID table sizes when $k = 11$. The database is the \texttt{UniProtKB/Swiss-Prot} database obtained through \texttt{mmseqs databases UniProtKB/Swiss-Prot swissprot tmp} command. Without optimization, the sizes of \texttt{petasearch} data structures are 6.46 times and 12.92 times larger than the sequence database.}
-  \label{fig:k11_space}
-\end{figure}
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{images/bit_squeezing_technique.pdf}
-  \captionof{figure}{The example decoding process of difference index $2039432531946$. We first retrieve 15-bit chunks starting from the least significant bits and store them into a write buffer in the reverse order until we encounter a zero chunk. For $2039432531946$, its highest non-zero bit is $39$, which means that we need three 16-bit \texttt{short} to store it.}
-  \label{fig:bit_squeeze_technique}
-\end{figure}
+    \captionof{figure}{Visualizaiton of k-mer table and ID table sizes when $k = 11$. The database is the \texttt{UniProtKB/Swiss-Prot} database obtained through \texttt{mmseqs databases UniProtKB/Swiss-Prot swissprot tmp} command. Without optimization, the sizes of \texttt{petasearch} data structures are 6.46 times and 12.92 times larger than the sequence database.}
+    \label{fig:k11_space}
+  \end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/bit_squeezing_technique.pdf}
+    \captionof{figure}{The example decoding process of difference index $2039432531946$. We first retrieve 15-bit chunks starting from the least significant bits and store them into a write buffer in the reverse order until we encounter a zero chunk. For $2039432531946$, its highest non-zero bit is $39$, which means that we need three 16-bit \texttt{short} to store it.}
+    \label{fig:bit_squeeze_technique}
+  \end{figure}
 \end{figpage}
 
 \section{Speed Optimization}
