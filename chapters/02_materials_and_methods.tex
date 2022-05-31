@@ -1,4 +1,4 @@
-\chapter{Materials \& Methods}
+\chapter{Materials \& Methods} \label{chapter:materials-methods}
 
 % 학위 논문의 결과를 도출하는 데에 사용한 실험 재료와 방법을 타인이 반복 실험 시 동일한 결과를 얻을 수 있을 정도로 자세히 기술한다. 방법에 따라 다음과 같이 부제를 넣어 기술한다.f
 
@@ -29,15 +29,17 @@ Using the bit-squeezing method, it is possible to obtain a maximum of five chunk
 
 While decoding the compressed diff-index in the process of double-index search, we will reverse the bit-squeezing process through repeatedly retrieving 15 bits from the diff-index table until we encounter the chunk with the sign bit set to \texttt{1}. The decoded difference value will be add to the current k-mer. Moreover, since we do not store redundant IDs, the ID pointer will not be incremented until the end of k-mer decoding. \cref{algorithm:decode_kmer} showed the simplified pseudocode for k-mer decoding.
 
+\subsection{Protein Sequence Compression}
+
+For terabyte-size databases, the sequences themselves are also space consuming. To further reduce the size of the databases, we developed the \texttt{ASCII}-sqeezing technique.
 
 \begin{figpage}
   \begin{figure}
     \centering
-    \includegraphics[width=.8\textwidth]{images/k11_space_consumption.pdf}
+    \includegraphics[width=.65\textwidth]{images/k11_space_consumption.pdf}
     \captionof{figure}{Visualizaiton of k-mer table and ID table sizes when $k = 11$. The database is the \texttt{UniProtKB/Swiss-Prot} database obtained through \texttt{mmseqs databases UniProtKB/Swiss-Prot swissprot tmp} command. Without optimization, the sizes of \texttt{petasearch} data structures are 6.46 times and 12.92 times larger than the sequence database.}
     \label{fig:k11_space}
-  \end{figure}
-  \begin{figure}
+    \bigskip
     \centering
     \includegraphics[width=\textwidth]{images/bit_squeezing_technique.pdf}
     \captionof{figure}{The example decoding process of difference index $2039432531946$. We first retrieve 15-bit chunks starting from the least significant bits and store them into a write buffer in the reverse order until we encounter a zero chunk. For $2039432531946$, its highest non-zero bit is $39$, which means that we need three 16-bit \texttt{short} to store it.}
@@ -67,13 +69,7 @@ While decoding the compressed diff-index in the process of double-index search, 
   \end{algorithmic}
 \end{algorithm}
 
-\subsection{Protein Sequence Compression}
-
-For terabyte-size databases, the sequences themselves are also space consuming. To further reduce the size of the databases, we developed the \texttt{ASCII}-sqeezing technique.
-
-Protein sequences are represented by a limited subset of \texttt{ASCII} characters, which are encoded by a single byte. However, as is shown in \autoref{fig:ascii_prot}, we only need 5 bits to represent all the amino acids. Therefore, we can squeeze every three amino acids into one 16-bit \texttt{short}. Similar to the bit-squeezing technique described in \cref{section:diff-index_compression}, we also use the sign bit to indicated the end of the compressed protein sequence. \autoref{fig:prot_seq_compress} showed an example compression process for glutathione (GSH).
-
-The \texttt{ASCII}-squeezing technique is expected to produce a sqeuence database about $85\%$ of the original size.
+Protein sequences are represented by a limited subset of \texttt{ASCII} characters, which are encoded by a single byte. However, as is shown in \autoref{fig:ascii_prot}, we only need 5 bits to represent all the amino acids. Therefore, we can squeeze every three amino acids into one 16-bit \texttt{short}. Similar to the bit-squeezing technique described in \cref{section:diff-index_compression}, we also use the sign bit to indicated the end of the compressed protein sequence. \autoref{fig:prot_seq_compress} showed an example compression process for glutathione (GSH). The \texttt{ASCII}-squeezing technique is expected to produce a sqeuence database about $85\%$ of the original size.
 
 \section{Speed Optimization}
 
@@ -81,22 +77,34 @@ Speed is the first and foremost concern of \texttt{Petasearch}. The speed of \te
 
 \subsection{IO Performance Optimization}
 
-\subsection{Fast third party libraries}
+In the prototypical \texttt{Petasearch} implementation, \texttt{mmap} was selected for reading \texttt{Petasearch} data structures stored on NVMe SSDs. However, \texttt{mmap} does not scale well with the increase in threads (\cite{papagiannis2020optimizing}) and thus cannot saturate the full throughput of NVMe SSDs. To find the IO tool with the best performance, we conducted a benchmarking study on the performance of various IO tools using FIO benchmark software (\cite{AxboeFlexibleIOTester2022}). For synced IO tools, we benchmarked \texttt{pread} using different flags and \texttt{mmap}. For async IO tools, we benchmarked \texttt{libaio} and \texttt{posix\_aio}.
 
+The benchmarking results are visualized in \autoref{fig:fio_benchmark}. It is clear that \texttt{libaio} performs the best. I is able to saturate the full 3.5 GB/s linear read bandwidth of NVMe SSDs. The other two tools, \texttt{posix\_aio} and \texttt{pread} with \texttt{O\_DIRECT} (\texttt{ioengine = psync} in FIO) have roughly the same performance, with bandwidth around 3.3 GB/s. Unfortunately, \texttt{mmap} has the worst performance, with only about 1.5 GB/s at maximum. The performance even fell to 0.25 GB/s when it scaled to 20 threads. Since \texttt{mmap} is a synced IO module, adopting another synced IO module will require almost no change in control logic. Considering both the performance and difficulty of refactoring, we chose to use \texttt{pread} with \texttt{O\_DIRECT} in place of \texttt{mmap}.
+
+The implementation of \texttt{pread} with \texttt{O\_DIRECT} is rather simple: we simply create a read buffer according to the currently available memory size, open the k-mer diff-index file with \texttt{O\_DIRECT} flag, and then read in parallel using \texttt{pread} continuously untill \texttt{EOF} (end of file).
 
 \begin{figpage}
-  \begin{figure}
+  \thispagestyle{fancy}
+  \begin{figure}[htbp]
     \centering
-    \includegraphics[width=.7\textwidth]{images/ASCII_prot.pdf}
+    \includegraphics[width=.6\textwidth]{images/ASCII_prot.pdf}
     \caption{Part of the ASCII table, showing the bit representation of \texttt{A} to \texttt{Z} with the last 5 bits highlighted. It can be clearly seen that for \texttt{A} to \texttt{Z} in the English alphabet, we can represent them using only 5 bits instead of a whole byte (8 bits).}
     \label{fig:ascii_prot}
-  \end{figure}
-  \begin{figure}
+    \bigskip
     \centering
-    \includegraphics[width=\textwidth]{images/prot_seq_compress.pdf}
-  \caption{The example compression of short peptide glutathione (GSH). GSH consists of only three amino acids: glutamate (E), cysteine (C), and glycine (G). We simply fetch the least significant 5 bits of each amino acid \texttt{char} and store them into a single 16-bit \texttt{short}.}
-  \label{fig:prot_seq_compress}
-\end{figure}
+    \includegraphics[width=.9\textwidth]{images/prot_seq_compress.pdf}
+    \caption{The example compression of short peptide glutathione (GSH). GSH consists of only three amino acids: glutamate (E), cysteine (C), and glycine (G). We simply fetch the least significant 5 bits of each amino acid \texttt{char} and store them into a single 16-bit \texttt{short}.}
+    \label{fig:prot_seq_compress}
+    \bigskip
+    \centering
+    \includegraphics[width=.65\textwidth]{images/fio_benchmark.pdf}
+    \caption{Benchmarking results of various IO tools using FIO benchmark software. The benchmark setting is imitating a parallel read from 20 NVMe SSDs. A total of 20 threads were created, each one responsible of reading a 50 GB file stored on one NVMe SSD. The bandwidth is the average reading bandwidth per SSD. The IO engine \texttt{psync} is equivalent to opening a file handle with \texttt{O\_DIRECT} and reading from the handle using \texttt{pread}.}
+    \label{fig:fio_benchmark}
+  \end{figure}
 \end{figpage}
+
+\subsection{Simplified Database Index}
+
+\subsection{Fast Third Party Libraries}
 
 \section{Sensitivity Improvement}
