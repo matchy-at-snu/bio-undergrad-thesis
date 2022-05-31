@@ -29,24 +29,6 @@ Using the bit-squeezing method, it is possible to obtain a maximum of five chunk
 
 While decoding the compressed diff-index in the process of double-index search, we will reverse the bit-squeezing process through repeatedly retrieving 15 bits from the diff-index table until we encounter the chunk with the sign bit set to \texttt{1}. The decoded difference value will be add to the current k-mer. Moreover, since we do not store redundant IDs, the ID pointer will not be incremented until the end of k-mer decoding. \cref{algorithm:decode_kmer} showed the simplified pseudocode for k-mer decoding.
 
-\subsection{Protein Sequence Compression}
-
-For terabyte-size databases, the sequences themselves are also space consuming. To further reduce the size of the databases, we developed the \texttt{ASCII}-sqeezing technique.
-
-\begin{figpage}
-  \begin{figure}
-    \centering
-    \includegraphics[width=.65\textwidth]{images/k11_space_consumption.pdf}
-    \captionof{figure}{Visualizaiton of k-mer table and ID table sizes when $k = 11$. The database is the \texttt{UniProtKB/Swiss-Prot} database obtained through \texttt{mmseqs databases UniProtKB/Swiss-Prot swissprot tmp} command. Without optimization, the sizes of \texttt{petasearch} data structures are 6.46 times and 12.92 times larger than the sequence database.}
-    \label{fig:k11_space}
-    \bigskip
-    \centering
-    \includegraphics[width=\textwidth]{images/bit_squeezing_technique.pdf}
-    \captionof{figure}{The example decoding process of difference index $2039432531946$. We first retrieve 15-bit chunks starting from the least significant bits and store them into a write buffer in the reverse order until we encounter a zero chunk. For $2039432531946$, its highest non-zero bit is $39$, which means that we need three 16-bit \texttt{short} to store it.}
-    \label{fig:bit_squeeze_technique}
-  \end{figure}
-\end{figpage}
-
 \begin{algorithm}[htbp]
   \begin{algorithmic}
     \Procedure{DecodeKmer}{$currentKmer$, $currentTargetKmerPtr$, $currentTargetIDPtr$}
@@ -69,7 +51,30 @@ For terabyte-size databases, the sequences themselves are also space consuming. 
   \end{algorithmic}
 \end{algorithm}
 
+\subsection{Protein Sequence Compression}
+
+For terabyte-size databases, the sequences themselves are also space consuming. To further reduce the size of the databases, we developed the \texttt{ASCII}-sqeezing technique.
+
 Protein sequences are represented by a limited subset of \texttt{ASCII} characters, which are encoded by a single byte. However, as is shown in \autoref{fig:ascii_prot}, we only need 5 bits to represent all the amino acids. Therefore, we can squeeze every three amino acids into one 16-bit \texttt{short}. Similar to the bit-squeezing technique described in \cref{section:diff-index_compression}, we also use the sign bit to indicated the end of the compressed protein sequence. \autoref{fig:prot_seq_compress} showed an example compression process for glutathione (GSH). The \texttt{ASCII}-squeezing technique is expected to produce a sqeuence database about $85\%$ of the original size.
+
+
+\begin{figpage}
+  \begin{figure}
+    \centering
+    \includegraphics[width=.65\textwidth]{images/k11_space_consumption.pdf}
+    \captionof{figure}{Visualizaiton of k-mer table and ID table sizes when $k = 11$. The database is the \texttt{UniProtKB/Swiss-Prot} database obtained through \texttt{mmseqs databases UniProtKB/Swiss-Prot swissprot tmp} command. Without optimization, the sizes of \texttt{petasearch} data structures are 6.46 times and 12.92 times larger than the sequence database.}
+    \label{fig:k11_space}
+    \bigskip
+    \centering
+    \includegraphics[width=\textwidth]{images/bit_squeezing_technique.pdf}
+    \captionof{figure}{The example decoding process of difference index $2039432531946$. We first retrieve 15-bit chunks starting from the least significant bits and store them into a write buffer in the reverse order until we encounter a zero chunk. For $2039432531946$, its highest non-zero bit is $39$, which means that we need three 16-bit \texttt{short} to store it.}
+    \label{fig:bit_squeeze_technique}
+  \end{figure}
+\end{figpage}
+
+
+
+
 
 \section{Speed Optimization}
 
