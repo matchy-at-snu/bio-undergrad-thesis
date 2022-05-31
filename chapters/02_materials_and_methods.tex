@@ -72,10 +72,6 @@ Protein sequences are represented by a limited subset of \texttt{ASCII} characte
   \end{figure}
 \end{figpage}
 
-
-
-
-
 \section{Speed Optimization}
 
 Speed is the first and foremost concern of \texttt{Petasearch}. The speed of \texttt{Petaserch} prototype is already fast, but did not make it stand out too much from its competitors. In this section, we will introduce several techniques to further boost the speed of \texttt{Petasearch}.
@@ -87,6 +83,10 @@ In the prototypical \texttt{Petasearch} implementation, \texttt{mmap} was select
 The benchmarking results are visualized in \autoref{fig:fio_benchmark}. It is clear that \texttt{libaio} performs the best. I is able to saturate the full 3.5 GB/s linear read bandwidth of NVMe SSDs. The other two tools, \texttt{posix\_aio} and \texttt{pread} with \texttt{O\_DIRECT} (\texttt{ioengine = psync} in FIO) have roughly the same performance, with bandwidth around 3.3 GB/s. Unfortunately, \texttt{mmap} has the worst performance, with only about 1.5 GB/s at maximum. The performance even fell to 0.25 GB/s when it scaled to 20 threads. Since \texttt{mmap} is a synced IO module, adopting another synced IO module will require almost no change in control logic. Considering both the performance and difficulty of refactoring, we chose to use \texttt{pread} with \texttt{O\_DIRECT} in place of \texttt{mmap}.
 
 The implementation of \texttt{pread} with \texttt{O\_DIRECT} is rather simple: we simply create a read buffer according to the currently available memory size, open the k-mer diff-index file with \texttt{O\_DIRECT} flag, and then read in parallel using \texttt{pread} continuously untill \texttt{EOF} (end of file).
+
+\subsection{Simplified Database Index}
+
+In \texttt{Pteasearch} prototype, the sequence database format is the same as that of \texttt{MMseqs}, which has many functions uses a complexed index structure. Such complexity is unnecessary for \texttt{Petasearch}. Hence, we simplified the index, only preservingthe offset of the corresponding entry in the sequence database. It is expected to reduce the IO time.
 
 \begin{figpage}
   \thispagestyle{fancy}
@@ -108,8 +108,12 @@ The implementation of \texttt{pread} with \texttt{O\_DIRECT} is rather simple: w
   \end{figure}
 \end{figpage}
 
-\subsection{Simplified Database Index}
+\subsection{Fast Third-Party Libraries}
 
-\subsection{Fast Third Party Libraries}
+We integrated several fast thrid-party libraries to replace the slow implementaions in \texttt{Petaserch} prototype. The fast parallel in-place sorting algorithm $IPS^4o$ (\cite{axtmann2017place}) was integrated to replace the slow \texttt{std::sort}. The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} (\cite{liu2021block}) was used to allow fast pairwise alignment in the third phase.
 
 \section{Sensitivity Improvement}
+
+The k-mer matching mechanism limits \texttt{Petasearch}'s ability of finding homologs with low sequence identity. To improve \texttt{Petasearch}'s performance at lower sequence identity, we made \texttt{Petasearch} able to perform profile search by allowing profile databases as inputs.
+
+Profile search is using a "sequence profile" generated from multiple sequence alignment (MSA) results as the querying input (\cite{steinegger2019hh}). The profile Hidden Markov Model (HMM) provides position-specific aminoaid indel and substitution penalties (\cite{steinegger2019hh}), which significantly increase the searching sensitivity. The most sensitive searching tools such as \texttt{HMMER} (\cite{eddy2009new}, \cite{eddy2011accelerated}), \texttt{HHblits} (\cite{remmert2012hhblits}) and \texttt{HH-suite3} (\cite{steinegger2019hh}) all use the profile search mechanism. Thus, enabling \texttt{Petaserch} to perform profile search is expected to improve its sensitivity at low sequence identity.
