@@ -36,7 +36,6 @@ The contributions of the author were detailed in \cref{section:space-optimizatio
     \caption{
       The figure gives a general overview of the Petasearch steps. The preparation step, which will utilize the \texttt{convert2sradb()} and \texttt{createkmertable()} functions, creates the target tables that store all unique k-mers for each database. The pre-filtering step, which is implemented in \texttt{compare2kmertables()} consists of a highly parallelized double index search that streams the target tables directly from different solid state devices (SSDs) to saturate their maximum possible read rates and avoid random memory accesses. Requiring duplicate k-mer matches for each query-target sequence pair reduces the possibility of random hits and increases the specificity of the hits. An alignment for a query-target sequence pair is computed if the distance between diagonals for at least one k-mer pair is less than four. This constraint removes sequence pairs where the positions of the matching k-mers are not close and therefore a good alignment is unlikely. The alignment phase is realized in function \texttt{computeAlignment()} and the alignment output is possible to be converted into popular output formats such as the \texttt{BLAST -m 8} format.
     }
-
     \label{fig:overview}
   \end{figure}
 \end{figpage}
