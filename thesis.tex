@@ -30,19 +30,12 @@
 \usepackage{subcaption}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-% \setmainfont[
-%   BoldFont=Noto Serif Bold,
-%   ItalicFont=Noto Serif Italic,
-%   BoldItalicFont=Noto Serif Bold Italic,
-%   SmallCapsFont=Noto Sans SC
-% ]{Noto Serif}
+% \usepackage{Alegreya}
+\usepackage{lmodern}
+\usepackage{enumitem}
+% \setmainfont{cm}
 
-% \setmainhangulfont[
-%   SmallCapsFont=Alegreya SC
-% ]{NanumMyeongjo}
-% \sethangulsansfont{Noto Sans KR}
-% \sethangulmonofont{Noto Sans Mono}
-
+\parskip=16pt
 % \spaceskip=0.5em
 
 \usepackage{etoolbox}
@@ -158,6 +151,7 @@
 %%
 % \usepackage{titlesec}
 % chapter
+% \titlespacing{\chapter}{0pt}{50pt}{<after-sep>}
 \titleformat{name=\chapter}
   [block] % shape
   {\Large\bfseries} % format
@@ -175,7 +169,7 @@
 \titlespacing*{\chapter}
   {0pt}
   {-30pt}
-  {\baselineskip}
+  {0pt}
 
 % section
 \titleformat{name=\section}
@@ -199,11 +193,11 @@
 %%
 \newenvironment{figpage}{
   \clearpage
-  \SetSinglespace{1.3}
+  \SetSinglespace{1.2}
   \addtocounter{page}{-1}
   \thispagestyle{empty}
     }{
-  \SetSinglespace{1.6}
+  \SetSinglespace{1.4}
   \clearpage
 }
 
@@ -211,7 +205,7 @@
 %% Set up spacing
 %%
 % \usepackage{setspace}
-\SetSinglespace{1.6}
+\SetSinglespace{1.4}
 \singlespacing
 
 %%
