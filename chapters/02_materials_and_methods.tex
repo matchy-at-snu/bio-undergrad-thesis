@@ -120,9 +120,9 @@ Speed is the first and foremost concern of \texttt{Petasearch}.
 The speed of \texttt{Petasearch} prototype is already fast, but did not make it stand out too much from its competitors.
 In this section, we will introduce several techniques to further boost the speed of \texttt{Petasearch}.
 
-
+\pagebreak
 \begin{figpage}
-  \begin{figure}[tb]
+  \begin{figure}
     \centering
     \includegraphics[width=.8\textwidth]{images/k11_space_consumption.pdf}
     \captionof{figure}{\textbf{Visualizaiton of k-mer table and ID table sizes when $\mathbf{k = 11}$.}
@@ -139,7 +139,7 @@ In this section, we will introduce several techniques to further boost the speed
     \label{fig:bit_squeeze_technique}
   \end{figure}
 \end{figpage}
-
+\pagebreak
 
 \subsection{IO Performance Optimization} \label{section:io-performance}
 
@@ -173,7 +173,7 @@ We integrated several fast thrid-party libraries to replace the slow implementai
 The fast parallel in-place sorting algorithm $IPS^4o$ \cite{axtmann2017place} was integrated to replace the slow \texttt{std::sort}.
 The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} \cite{liu2021block} was used to allow fast pairwise alignment in the third phase.
 
-
+\pagebreak
 \begin{figpage}
   \thispagestyle{fancy}
   \begin{figure}[htbp]
@@ -201,6 +201,7 @@ The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} \cite{liu2021bloc
     \label{fig:fio_benchmark}
   \end{figure}
 \end{figpage}
+\pagebreak
 
 \section{Sensitivity Improvement} \label{section:sensitivity-improvement}
 
