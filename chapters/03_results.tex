@@ -13,10 +13,13 @@ For gigabyte-sized database, the compression efficiency is even higher -- a 82.1
 
 \section{Speed Benchmark}
 
-
+Because of space limitation, the detailed effect of each optimization was omitted. Instead we present the results of speed benchmark in \autoref{tab:time_benchmark} with all optimizations applied. The results were also visualized in visualized in \autoref{fig:speed} to give the readers an intuitive impression of how fast the algorithm is. It is noteworthy that in the benchmark for \texttt{Petasearch} prototype, the searching time for a 450GB target set was already 15m49s without generating similar k-mers.
 
 \section{Sensitivity Benchmark}
 
+We visualized the sensitivity benchmark in \autoref{fig:sensitivity}. It is confirmed that \texttt{Petasearch} worked as expected as it found a similar number of high sequence identity hits to other methods. The performance is comparable up to $60\%$ sequence identity.
+
+\pagebreak
 \begin{figpage}
   \newgeometry{left=8mm, right=10mm}
   \captionsetup[figure]{width=.9\linewidth}
@@ -30,18 +33,18 @@ For gigabyte-sized database, the compression efficiency is even higher -- a 82.1
       \includegraphics[width=\textwidth]{images/bitsqueeze_alternative.pdf}
       \centering
       \caption{Visualization of he total amount of reduction in space usage for the \texttt{Petasearch} data structures.
-The great reduction in space usage makes the previous implausible search for 11-mer index possible.}
+        The great reduction in space usage makes the previous implausible search for 11-mer index possible.}
       \label{fig:total_effect_of_bitsqueeze}
     \end{subfigure}
     \begin{subfigure}{0.5\textwidth}
       \centering
       \includegraphics[width=\textwidth]{images/bitsqueeze_optimization.pdf}
       \caption{Visualization of the space reduction for k-mer table and ID table separately.
-The carefully designed bit-squeezing technique and redundancy reducion for ID table are both highly effective.}
+        The carefully designed bit-squeezing technique and redundancy reducion for ID table are both highly effective.}
       \label{fig:separate_effect_of_bitsqueeze}
     \end{subfigure}
     \caption{\textbf{Effect of space optimization for k-mer diff-index table and ID table using bit-squeezing technique at $\mathbf{k = 11}$.} \cref{fig:total_effect_of_bitsqueeze} showed the total effect of bit-squeezing on both \texttt{Petasearch} data structures.
-\cref{fig:separate_effect_of_bitsqueeze} showed the effect of bit-squeezing on the k-mer diff-index table and the ID table separately.}
+      \cref{fig:separate_effect_of_bitsqueeze} showed the effect of bit-squeezing on the k-mer diff-index table and the ID table separately.}
     \label{fig:space_opt}
   \end{figure}
   \begin{figure}
@@ -62,3 +65,79 @@ The carefully designed bit-squeezing technique and redundancy reducion for ID ta
   \end{figure}
   \restoregeometry
 \end{figpage}
+\pagebreak
+\begin{figpage}
+  \newgeometry{left=8mm, right=8mm, top=15mm}
+  \captionsetup[figure]{width=.8\linewidth}
+  \captionsetup[table]{width=.8\linewidth}
+  \begin{figure}[t]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/time_benchmark.pdf}
+    \caption{\textbf{Visualization of the speed benchmark results.}
+      It is clearly shown that the optimization is very effective -- the runtime of \texttt{Petasearch} is almost negligible compared to \texttt{MMseqs2} and \texttt{DIAMOND}.}
+    \label{fig:speed}
+  \end{figure}
+  \begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|c|l|l|}
+      \hline
+      \rowcolor[HTML]{5263B5}
+      {\color[HTML]{FFFFFF} Name}                                                            &
+      {\color[HTML]{FFFFFF} Time}                                                            &
+      {\color[HTML]{FFFFFF} Speed up}                                                        &
+      \multicolumn{1}{c|}{\cellcolor[HTML]{5263B5}{\color[HTML]{FFFFFF} Special parameters}} &
+      \multicolumn{1}{c|}{\cellcolor[HTML]{5263B5}{\color[HTML]{FFFFFF} Notes}}                                                                                                                    \\ \hline
+      \rowcolor[HTML]{FFFFFF}
+      \cellcolor[HTML]{FFFFFF}                                                               & 12m 32s     & -    & \texttt{--exact-kmer-matching 1} &
+      \begin{tabular}[c]{@{}l@{}}Do not generate similar k-mers for query\\ database. \end{tabular}                                                                                                \\ \cline{2-5}
+      \rowcolor[HTML]{FFFFFF}
+      \multirow{-2}{*}{\cellcolor[HTML]{FFFFFF}petasearch}                                   & 15m 17s     & -    & \texttt{--exact-kmer-matching 0} &
+      \begin{tabular}[c]{@{}l@{}} Generate similar k-mers for query datab\\ase. \end{tabular}                                                                                                      \\ \hline
+      \rowcolor[HTML]{FFFFFF}
+      \cellcolor[HTML]{FFFFFF}                                                               &
+      9h 25m 45s                                                                             &
+      38x                                                                                    &
+      \texttt{--min-score 40 --algo 1}                                                       &
+      \begin{tabular}[c]{@{}l@{}}Apply the fast query-indexed algorithm. \\ Did not include the \texttt{makedb} time \end{tabular}                                                                 \\ \cline{2-5}
+      \rowcolor[HTML]{FFFFFF}
+      \multirow{-2}{*}{\cellcolor[HTML]{FFFFFF}DIAMOND}                                      &
+      16h 55m 06s                                                                            &
+      68x                                                                                    &
+      \texttt{--min-score 40 --algo 0}                                                       &
+      \begin{tabular}[c]{@{}l@{}}Use the default sensitive double-indexed \\algorithm.\\ Did not include the \texttt{makedb} time \end{tabular}                                                    \\ \hline
+      \rowcolor[HTML]{FFFFFF}
+      MMseqs2                                                                                & 47h 48m 04s & 191x & Default params                   & Did not include the \texttt{createdb} time. \\ \hline
+    \end{tabular}
+    \caption{\textbf{Results of the time benchmark using \texttt{Petasearch}, \texttt{MMseqs2} and \texttt{DIAMOND}.}
+      We searched a 2MB query set against a 9.3TB target set (size of the \texttt{FASTA} file including the headers). We prepared a total of 146 target database chunks distributed across 21 NVMe SSDs, 11 of which have 6 chunks and 10 of which have 8 chunks.
+      The size of the chunks are evenly distributed. For \texttt{Petasearch}, we repeated the benchmark 10 times to get an average time.
+      For \texttt{MMseqs2} and \texttt{DIAMOD}, they were only run once since the time for a full round of search is too long. The parameters and the corresponding explanation of the parameters used in the benchmark were given in the fourth and fifth columns of the table.}
+    \label{tab:time_benchmark}
+  \end{table}
+  \restoregeometry
+\end{figpage}
+\pagebreak
+
+\begin{figpage}
+  \newgeometry{left=8mm, right=8mm}
+  \captionsetup[figure]{width=.8\linewidth}
+  \begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/overallHits.pdf}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{images/totalTP.pdf}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+      \includegraphics[width=\textwidth]{images/percTP.pdf}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+      \includegraphics[width=\textwidth]{images/percFP.pdf}
+    \end{subfigure}
+    \caption{\textbf{Results of the sensitivity benchmark.}}
+  \end{figure}
+  \restoregeometry
+\end{figpage}
+\pagebreak
