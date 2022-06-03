@@ -34,7 +34,7 @@ The contributions of the author were detailed in \cref{section:space-optimizatio
   \begin{figure}
     \includegraphics[width=\textwidth]{images/overview.pdf}
     \caption{
-      The figure gives a general overview of the Petasearch steps. The preparation step, which will utilize the \texttt{convert2sradb()} and \texttt{createkmertable()} functions, creates the target tables that store all unique k-mers for each database. The pre-filtering step, which is implemented in \texttt{compare2kmertables()} consists of a highly parallelized double index search that streams the target tables directly from different solid state devices (SSDs) to saturate their maximum possible read rates and avoid random memory accesses. Requiring duplicate k-mer matches for each query-target sequence pair reduces the possibility of random hits and increases the specificity of the hits. An alignment for a query-target sequence pair is computed if the distance between diagonals for at least one k-mer pair is less than four. This constraint removes sequence pairs where the positions of the matching k-mers are not close and therefore a good alignment is unlikely. The alignment phase is realized in function \texttt{computeAlignment()} and the alignment output is possible to be converted into popular output formats such as the \texttt{BLAST -m 8} format.
+      \textbf{General overview of the Petasearch steps.} The preparation step, which will utilize the \texttt{convert2sradb()} and \texttt{createkmertable()} functions, creates the target tables that store all unique k-mers for each database. The pre-filtering step, which is implemented in \texttt{compare2kmertables()} consists of a highly parallelized double index search that streams the target tables directly from different solid state devices (SSDs) to saturate their maximum possible read rates and avoid random memory accesses. Requiring duplicate k-mer matches for each query-target sequence pair reduces the possibility of random hits and increases the specificity of the hits. An alignment for a query-target sequence pair is computed if the distance between diagonals for at least one k-mer pair is less than four. This constraint removes sequence pairs where the positions of the matching k-mers are not close and therefore a good alignment is unlikely. The alignment phase is realized in function \texttt{computeAlignment()} and the alignment output is possible to be converted into popular output formats such as the \texttt{BLAST -m 8} format.
     }
     \label{fig:overview}
   \end{figure}
@@ -125,7 +125,7 @@ In this section, we will introduce several techniques to further boost the speed
   \begin{figure}[tb]
     \centering
     \includegraphics[width=.65\textwidth]{images/k11_space_consumption.pdf}
-    \captionof{figure}{Visualizaiton of k-mer table and ID table sizes when $k = 11$.
+    \captionof{figure}{\textbf{Visualizaiton of k-mer table and ID table sizes when $\mathbf{k = 11}$.}
       The database is the \textit{UniProtKB/Swiss-Prot} database obtained through \texttt{mmseqs databases UniProtKB/Swiss-Prot swissprot tmp} command.
       Without optimization, the sizes of \texttt{petasearch} data structures are 6.46 times and 12.92 times larger than the sequence database.}
     \label{fig:k11_space}
@@ -133,7 +133,7 @@ In this section, we will introduce several techniques to further boost the speed
   \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{images/bit_squeezing_technique.pdf}
-    \captionof{figure}{The example decoding process of difference index $2039432531946$.
+    \captionof{figure}{\textbf{The example decoding process of difference index $\mathbf{2039432531946}$.}
       We first retrieve 15-bit chunks starting from the least significant bits and store them into a write buffer in the reverse order until we encounter a zero chunk.
       For $2039432531946$, its highest non-zero bit is $39$, which means that we need three 16-bit \texttt{short} to store it.}
     \label{fig:bit_squeeze_technique}
@@ -179,7 +179,7 @@ The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} \cite{liu2021bloc
   \begin{figure}[htbp]
     \centering
     \includegraphics[width=.6\textwidth]{images/ASCII_prot.pdf}
-    \caption{Part of the ASCII table, showing the bit representation of \texttt{A} to \texttt{Z} with the last 5 bits highlighted.
+    \caption{\textbf{Part of the ASCII table, showing the bit representation of \texttt{A} to \texttt{Z} with the last 5 bits highlighted.}
       It can be clearly seen that for \texttt{A} to \texttt{Z} in the English alphabet, we can represent them using only 5 bits instead of a whole byte (8 bits).}
     \label{fig:ascii_prot}
     \bigskip
