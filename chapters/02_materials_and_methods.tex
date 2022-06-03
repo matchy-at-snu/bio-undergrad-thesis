@@ -47,7 +47,7 @@ However, the resources are not limitless.
 Thus, we would like to keep the cost of space as low as possible while keeping the searching speed high.
 In this section, we will discuss the space optimization techniques utilized to improve \texttt{Petasearch} prototype.
 
-\subsection{Diff-index Compression} \label{section:diff-index_compression}
+\subsection{Petasearch Data Structures Compression} \label{section:diff-index_compression}
 
 As is described in \cref{section:overview-of-current-algorithm}, the values in diff-index created in the k-mer extraction step are usually able to fit inside a \texttt{short} integer.
 However, when the difference is larger than \texttt{USHRT\_MAX}, in the prototypical implementation, we will store multiple \texttt{USHRT\_MAX} as long as the difference is larger than \texttt{USHRT\_MAX}.
@@ -163,9 +163,9 @@ The implementation of \texttt{pread} with \texttt{O\_DIRECT} is rather simple: w
 \subsection{Simplified Database Index} \label{section:simplified-database-index}
 
 In \texttt{Petasearch} prototype, the sequence database format is the same as that of \texttt{MMseqs2}, which uses a complexed index structure for it having many functions.
-Such complexity is unnecessary for \texttt{Petasearch}.
+Such complexity is unnecessary for \texttt{Petasearch}, especially when the database is huge in size, making the overhead for a complicated index become non-trivial.
 Hence, we simplified the index, only preservingthe offset of the corresponding entry in the sequence database.
-It is expected to reduce the IO time.
+The simple yet efficient chagne not only reduce the IO overhead, but also derease the space consumption.
 
 \subsection{Fast Third-Party Libraries}
 
