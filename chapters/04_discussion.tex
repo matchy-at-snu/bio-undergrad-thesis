@@ -16,23 +16,39 @@ The CRISPR-Cas system is a powerful gene editing tool medidated by the Cas effec
 We used \texttt{Petasearch} to search the Cas 7-11 MSA in \cite{ozcan_programmable_2021}
 for new shorter candidates of Cas 7-11 enzymes in the collected data.
 
-As a result, a total of 4484 valid Cas enzymes with at least one annotated putative catalytic domain were found. Amongst these, 250 even shorter (< 1500 amino acids long) sequences were found. The total searching time was no more than 10 minutes. The Multiple Sequence Alignment (MSA) of the 250 short candidates were generated using \texttt{mafft} \cite{katoh_mafft_2013} and visualized usng \texttt{CIAlign} \cite{tumescheit_cialign_2022} in \cref{fig:cas7-11-candidate-MSA}. Those candidates could serve as a basis for future programmable editing tools.
+As a result, a total of 4484 valid Cas enzymes with at least one annotated putative catalytic domain were found. Amongst these, more than 300 even shorter (< 2000 amino acids long) sequences were found. The total searching time was no more than 10 minutes. The Multiple Sequence Alignment (MSA) of the short candidates were generated using \texttt{mafft} \cite{katoh_mafft_2013} and visualized usng \texttt{CIAlign} \cite{tumescheit_cialign_2022} in \cref{fig:cas7-11-candidate-MSA}. Those candidates could serve as a basis for future programmable editing tools.
 
 \section{Discover homologs for rare RNA viral protein} \label{section:discover-homologs-for-rare-rna-virus-protein}
 
-We searched the collected data with 6 RNA-dependent RNA polymerases (RdRPs) from different RNA viruses. There were no known homologs found in previously established databases for those RdRPs. Using \texttt{Petasearch}, we found at least 40 homologs each except for one RdRP which is only 100 amino acid long (visualized in \autoref{fig:rna-virus-hits}). The total amount of search time was no more than 8 minutes. The MSAs for each virus were visualized in \autoref{fig:virus-msas}. Finding homologs for those rare RdRPs will enable structure predictors like AlphaFold2 to provide more accurate structure predictions and improve our understanding to them.
-
-\pagebreak
-\begin{figpage}
-  \begin{figure}
-    \centering
-
-  \end{figure}
-\end{figpage}
-\pagebreak
+We searched the collected data with 6 RNA-dependent RNA polymerases (RdRPs) from different RNA viruses. There were no known homologs found in previously established databases for those RdRPs. Using \texttt{Petasearch}, we found at least 40 homologs each except for one RdRP which is only 100 amino acid long. The total amount of search time was no more than 8 minutes. The MSAs for each virus were visualized in \autoref{fig:rna-virus-hits}. Finding homologs for those rare RdRPs will enable structure predictors like AlphaFold2 to provide more accurate structure predictions, improving our understanding of those proteins.
 
 \section{Conclusion and future work} \label{section:conclusion-and-future-work}
 
 In \cref{chapter:results}, we showed that the optimizations for \texttt{Petasearch} prototype were proved to be successful. The algorithm currently strikes a good balance between space usage and speed, in the meantime provides competitive sensitivity in its designed applications at a much accelerated speed. In the two explorative analyses, the algorithm showed its capability in fast discovery of various new protein homologs in environmental metagenomic databases. We can conclude that \texttt{Petasearch} is a lightning fast searching algorithm that can enable researchers to explore the vast amount of evolutionary information available in current and upcoming databases.
 
-For future directions, it will be beneficial to build a web service to make \texttt{Petasearch} more accessible to the public. We also plan to continuously integrate new metagenomic sequences to the current sequence corpus, making \texttt{Petasearch} able to explore a larger protein universe.
+For future directions, it will be beneficial to build a web service to make \texttt{Petasearch} more accessible to the public. We also plan to continuously integrate new metagenomic sequences to the current sequence corpus, making \texttt{Petasearch} able to explore a larger protein universe. We hope that \texttt{Petasearch} will become a valuable resource to uncover proteins for scientific,
+medical and biotechnological purposes by making all-encompassing searches through environmental sequencing data possible for the first time.
+
+
+\pagebreak
+\clearpage
+\begin{figpage}
+  \newgeometry{left=8mm,right=8mm, bottom=15mm}
+  \captionsetup[figure]{width=0.8\textwidth}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/cas711verysmall_valid_output.pdf}
+    \caption{\textbf{Multiple Sequence Alignments of short (< 2000 amino acid) Cas7-11 candidates.} Domain 1 and domain 2 are putative catalytic domains of Cas7-11 \cite{ozcan_programmable_2021}. The selected valid Cas7-11 candidates have at least one of the domain annotations, with domain2 preferred over domain 1.}
+    \label{fig:cas7-11-candidate-MSA}
+  \end{figure}
+  \begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{images/rna_virus_hits_with_images.pdf}
+    \caption{\textbf{Visualization of homologs for rare RNA virus protein.}
+    The upper left panel shows the distribution of homologs found in the collected data. Apart from T1033, which is a only 100 amino acid long short peptide,all other RdRPs have at least 40 homologs in the databases. The MSAs of each RdRP are generated in the other 5 panels.}
+    \label{fig:rna-virus-hits}
+  \end{figure}
+  \restoregeometry
+\end{figpage}
+\clearpage
+\pagebreak
