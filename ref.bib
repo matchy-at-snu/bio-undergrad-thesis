@@ -1,167 +1,345 @@
-@software{AxboeFlexibleIOTester2022,
-  author = {Axboe, Jens},
-  title  = {{Flexible I/O Tester}},
-  url    = {https://github.com/axboe/fio},
-  year   = {2022}
+
+@article{edgar_petabase-scale_2022,
+  title     = {Petabase-scale sequence alignment catalyses viral discovery},
+  volume    = {602},
+  copyright = {2022 The Author(s), under exclusive licence to Springer Nature Limited},
+  issn      = {1476-4687},
+  doi       = {10.1038/s41586-021-04332-2},
+  abstract  = {Public databases contain a planetary collection of nucleic acid sequences, but their systematic exploration has been inhibited by a lack of efficient methods for searching this corpus, which (at the time of writing) exceeds 20 petabases and is growing exponentially1. Here we developed a cloud computing infrastructure, Serratus, to enable ultra-high-throughput sequence alignment at the petabase scale. We searched 5.7 million biologically diverse samples (10.2 petabases) for the hallmark gene RNA-dependent RNA polymerase and identified well over 105 novel RNA viruses, thereby expanding the number of known species by roughly an order of magnitude. We characterized novel viruses related to coronaviruses, hepatitis delta virus and huge phages, respectively, and analysed their environmental reservoirs. To catalyse the ongoing revolution of viral discovery, we established a free and comprehensive database of these data and tools. Expanding the known sequence diversity of viruses can reveal the evolutionary origins of emerging pathogens and improve pathogen surveillance for the anticipation and mitigation of future pandemics.},
+
+  journal   = {Nature},
+  author    = {Edgar, Robert C. and Taylor, Jeff and Lin, Victor and Altman, Tomer and Barbera, Pierre and Meleshko, Dmitry and Lohr, Dan and Novakovsky, Gherman and Buchfink, Benjamin and Al-Shayeb, Basem and Banfield, Jillian F. and de la Peña, Marcos and Korobeynikov, Anton and Chikhi, Rayan and Babaian, Artem},
+
+  year      = {2022},
+  note      = {Number: 7895
+               Publisher: Nature Publishing Group},
+  keywords  = {Computational platforms and environments, Data mining, Hepatitis B virus, Metagenomics, SARS-CoV-2},
+  pages     = {142--147}
 }
 
-@article{axtmann2017place,
-  title   = {In-place Parallel Super Scalar Samplesort (IPS $\^{} 4$ o)},
-  author  = {Axtmann, Michael and Witt, Sascha and Ferizovic, Daniel and Sanders, Peter},
-  journal = {arXiv preprint arXiv:1705.02257},
-  year    = {2017}
+@misc{axboe_flexible_2022,
+  title     = {Flexible {I}/{O} {Tester}},
+  copyright = {GPL-2.0},
+  url       = {https://github.com/axboe/fio},
+  abstract  = {Flexible I/O Tester},
+  author    = {Axboe, Jens},
+  year      = {2022},
+  note      = {original-date: 2012-10-22T08:20:41Z}
 }
 
-@incollection{eddy2009new,
+@article{axtmann_engineering_2022,
+  title    = {Engineering {In}-place ({Shared}-memory) {Sorting} {Algorithms}},
+  volume   = {9},
+  issn     = {2329-4949},
+  doi      = {10.1145/3505286},
+  abstract = {We present new sequential and parallel sorting algorithms that now represent the fastest known techniques for a wide range of input sizes, input distributions, data types, and machines. Somewhat surprisingly, part of the speed advantage is due to the additional feature of the algorithms to work in-place, i.e., they do not need a significant amount of space beyond the input array. Previously, the in-place feature often implied performance penalties. Our main algorithmic contribution is a blockwise approach to in-place data distribution that is provably cache-efficient. We also parallelize this approach taking dynamic load balancing and memory locality into account. Our new comparison-based algorithm In-place Parallel Super Scalar Samplesort (IPS4o), combines this technique with branchless decision trees. By taking cases with many equal elements into account and by adapting the distribution degree dynamically, we obtain a highly robust algorithm that outperforms the best previous in-place parallel comparison-based sorting algorithms by almost a factor of three. That algorithm also outperforms the best comparison-based competitors regardless of whether we consider in-place or not in-place, parallel or sequential settings. Another surprising result is that IPS4o even outperforms the best (in-place or not in-place) integer sorting algorithms in a wide range of situations. In many of the remaining cases (often involving near-uniform input distributions, small keys, or a sequential setting), our new In-place Parallel Super Scalar Radix Sort (IPS2Ra) turns out to be the best algorithm. Claims to have the – in some sense – “best” sorting algorithm can be found in many papers which cannot all be true. Therefore, we base our conclusions on an extensive experimental study involving a large part of the cross product of 21 state-of-the-art sorting codes, 6 data types, 10 input distributions, 4 machines, 4 memory allocation strategies, and input sizes varying over 7 orders of magnitude. This confirms the claims made about the robust performance of our algorithms while revealing major performance problems in many competitors outside the concrete set of measurements reported in the associated publications. This is particularly true for integer sorting algorithms giving one reason to prefer comparison-based algorithms for robust general-purpose sorting.},
+  journal  = {ACM Trans. Parallel Comput.},
+  author   = {Axtmann, Michael and Witt, Sascha and Ferizovic, Daniel and Sanders, Peter},
+
+  year     = {2022},
+  keywords = {branch prediction, In-place algorithm},
+  pages    = {2:1--2:62}
+}
+
+@incollection{eddy_new_2009,
   title     = {A new generation of homology search tools based on probabilistic inference},
-  author    = {Eddy, Sean R},
-  booktitle = {Genome Informatics 2009: Genome Informatics Series Vol. 23},
-  pages     = {205--211},
+  isbn      = {978-1-84816-562-5},
+  booktitle = {Genome {Informatics} 2009},
+
+  author    = {Eddy, Sean R.},
+
   year      = {2009},
-  publisher = {World Scientific}
+  doi       = {10.1142/9781848165632_0019},
+  keywords  = {hidden Markov models, homology search, sequence alignment},
+  pages     = {205--211}
 }
 
-@article{eddy2011accelerated,
-  title     = {Accelerated profile HMM searches},
-  author    = {Eddy, Sean R},
-  journal   = {PLoS computational biology},
-  volume    = {7},
-  number    = {10},
-  pages     = {e1002195},
-  year      = {2011},
-  publisher = {Public Library of Science San Francisco, USA}
+@article{eddy_accelerated_2011,
+  title    = {Accelerated {Profile} {HMM} {Searches}},
+  volume   = {7},
+  issn     = {1553-7358},
+  doi      = {10.1371/journal.pcbi.1002195},
+  abstract = {Profile hidden Markov models (profile HMMs) and probabilistic inference methods have made important contributions to the theory of sequence database homology search. However, practical use of profile HMM methods has been hindered by the computational expense of existing software implementations. Here I describe an acceleration heuristic for profile HMMs, the “multiple segment Viterbi” (MSV) algorithm. The MSV algorithm computes an optimal sum of multiple ungapped local alignment segments using a striped vector-parallel approach previously described for fast Smith/Waterman alignment. MSV scores follow the same statistical distribution as gapped optimal local alignment scores, allowing rapid evaluation of significance of an MSV score and thus facilitating its use as a heuristic filter. I also describe a 20-fold acceleration of the standard profile HMM Forward/Backward algorithms using a method I call “sparse rescaling”. These methods are assembled in a pipeline in which high-scoring MSV hits are passed on for reanalysis with the full HMM Forward/Backward algorithm. This accelerated pipeline is implemented in the freely available HMMER3 software package. Performance benchmarks show that the use of the heuristic MSV filter sacrifices negligible sensitivity compared to unaccelerated profile HMM searches. HMMER3 is substantially more sensitive and 100- to 1000-fold faster than HMMER2. HMMER3 is now about as fast as BLAST for protein searches.},
+
+  journal  = {PLOS Computational Biology},
+  author   = {Eddy, Sean R.},
+
+  year     = {2011},
+  note     = {Publisher: Public Library of Science},
+  keywords = {BLAST algorithm, Computational pipelines, Computer software, Database searching, Heuristic alignment procedure, Hidden Markov models, Multiple alignment calculation, Sequence alignment},
+  pages    = {e1002195}
 }
 
-@article{liu2021block,
-  title     = {Block aligner: fast and flexible pairwise sequence alignment with SIMD-accelerated adaptive blocks},
-  author    = {Liu, Daniel and Steinegger, Martin},
-  journal   = {bioRxiv},
-  year      = {2021},
-  publisher = {Cold Spring Harbor Laboratory}
+@techreport{liu_block_2021,
+  title       = {Block aligner: fast and flexible pairwise sequence alignment with {SIMD}-accelerated adaptive blocks},
+  copyright   = {© 2021, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution 4.0 International), CC BY 4.0, as described at http://creativecommons.org/licenses/by/4.0/},
+  shorttitle  = {Block aligner},
+  abstract    = {Background The Smith-Waterman-Gotoh alignment algorithm is the most popular method for comparing biological sequences. Recently, Single Instruction Multiple Data methods have been used to speed up alignment. However, these algorithms have limitations like being optimized for specific scoring schemes, cannot handle large gaps, or require quadratic time computation.
+                 Results We propose a new algorithm called block aligner for aligning nucleotide and protein sequences. It greedily shifts and grows a block of computed scores to span large gaps within the aligned sequences. This greedy approach is able to only compute a fraction of the DP matrix. In exchange for these features, there is no guarantee that the computed scores are accurate compared to full DP. However, in our experiments, we show that block aligner performs accurately on various realistic datasets, and it is up to 9 times faster than the popular Farrar’s algorithm for protein global alignments.
+                 Conclusions Our algorithm has applications in computing global alignments and X-drop alignments on proteins and long reads. It is available as a Rust library at https://github.com/Daniel-Liu-c0deb0t/block-aligner.},
+
+  institution = {bioRxiv},
+  author      = {Liu, Daniel and Steinegger, Martin},
+
+  year        = {2021},
+  doi         = {10.1101/2021.11.08.467651},
+  note        = {Section: New Results
+                 Type: article},
+  pages       = {2021.11.08.467651}
 }
 
-@inproceedings{papagiannis2020optimizing,
-  title     = {Optimizing Memory-mapped I/O for Fast Storage Devices},
-  author    = {Papagiannis, Anastasios and Xanthakis, Giorgos and Saloustros, Giorgos and Marazakis, Manolis and Bilas, Angelos},
-  booktitle = {2020 USENIX Annual Technical Conference (USENIX ATC 20)},
-  pages     = {813--827},
-  year      = {2020}
+@inproceedings{papagiannis_optimizing_2020,
+  title    = {Optimizing {Memory}-mapped \{{I}/{O}\} for {Fast} {Storage} {Devices}},
+  isbn     = {978-1-939133-14-4},
+
+  author   = {Papagiannis, Anastasios and Xanthakis, Giorgos and Saloustros, Giorgos and Marazakis, Manolis and Bilas, Angelos},
+  year     = {2020},
+  pages    = {813--827}
 }
 
-@article{remmert2012hhblits,
-  title     = {HHblits: lightning-fast iterative protein sequence searching by HMM-HMM alignment},
-  author    = {Remmert, Michael and Biegert, Andreas and Hauser, Andreas and S{\"o}ding, Johannes},
-  journal   = {Nature methods},
-  volume    = {9},
-  number    = {2},
-  pages     = {173--175},
-  year      = {2012},
-  publisher = {Nature Publishing Group}
+@article{crotty_are_2022,
+  title    = {Are {You} {Sure} {You} {Want} to {Use} {MMAP} in {Your} {Database} {Management} {System}?},
+  abstract = {Memory-mapped (mmap) file I/O is an OS-provided feature that maps the contents of a file on secondary storage into a program’s address space. The program then accesses pages via pointers as if the file resided entirely in memory. The OS transparently loads pages only when the program references them and automatically evicts pages if memory fills up.},
+
+  author   = {Crotty, Andrew and Leis, Viktor and Pavlo, Andrew},
+  year     = {2022},
+  pages    = {7}
 }
 
-@article{steinegger2019hh,
-  title     = {HH-suite3 for fast remote homology detection and deep protein annotation},
-  author    = {Steinegger, Martin and Meier, Markus and Mirdita, Milot and V{\"o}hringer, Harald and Haunsberger, Stephan J and S{\"o}ding, Johannes},
-  journal   = {BMC bioinformatics},
-  volume    = {20},
-  number    = {1},
-  pages     = {1--15},
-  year      = {2019},
-  publisher = {BioMed Central}
+@article{remmert_hhblits_2012,
+  title      = {{HHblits}: lightning-fast iterative protein sequence searching by {HMM}-{HMM} alignment},
+  volume     = {9},
+  copyright  = {2011 Nature Publishing Group, a division of Macmillan Publishers Limited. All Rights Reserved.},
+  issn       = {1548-7105},
+  shorttitle = {{HHblits}},
+  doi        = {10.1038/nmeth.1818},
+  abstract   = {HHblits is a protein sequence search tool that works by iterative pairwise comparison of profile hidden Markov models. It outperforms existing tools in terms of speed, sensitivity and alignment quality.},
+
+  journal    = {Nat Methods},
+  author     = {Remmert, Michael and Biegert, Andreas and Hauser, Andreas and Söding, Johannes},
+
+  year       = {2012},
+  note       = {Number: 2
+                Publisher: Nature Publishing Group},
+  keywords   = {Bioinformatics, Protein databases},
+  pages      = {173--175}
 }
 
-@article{steinegger2019protein,
+@article{steinegger_hh-suite3_2019,
+  title    = {{HH}-suite3 for fast remote homology detection and deep protein annotation},
+  volume   = {20},
+  issn     = {1471-2105},
+  doi      = {10.1186/s12859-019-3019-7},
+  abstract = {HH-suite is a widely used open source software suite for sensitive sequence similarity searches and protein fold recognition. It is based on pairwise alignment of profile Hidden Markov models (HMMs), which represent multiple sequence alignments of homologous proteins.},
+  journal  = {BMC Bioinformatics},
+  author   = {Steinegger, Martin and Meier, Markus and Mirdita, Milot and Vöhringer, Harald and Haunsberger, Stephan J. and Söding, Johannes},
+
+  year     = {2019},
+  keywords = {Algorithm, Functional annotation, Homology detection, Profile HMM, Protein alignment, Sequence search, SIMD},
+  pages    = {473}
+}
+
+@article{steinegger_protein-level_2019,
   title     = {Protein-level assembly increases protein sequence recovery from metagenomic samples manyfold},
-  author    = {Steinegger, Martin and Mirdita, Milot and S{\"o}ding, Johannes},
-  journal   = {Nature methods},
   volume    = {16},
-  number    = {7},
-  pages     = {603--606},
+  copyright = {2019 The Author(s), under exclusive licence to Springer Nature America, Inc.},
+  issn      = {1548-7105},
+  doi       = {10.1038/s41592-019-0437-4},
+  abstract  = {The open-source de novo protein-level assembler, Plass (https://plass.mmseqs.com), assembles six-frame-translated sequencing reads into protein sequences. It recovers 2–10 times more protein sequences from complex metagenomes and can assemble huge datasets. We assembled two redundancy-filtered reference protein catalogs, 2 billion sequences from 640 soil samples (soil reference protein catalog) and 292 million sequences from 775 marine eukaryotic metatranscriptomes (marine eukaryotic reference catalog), the largest free collections of protein sequences.},
+
+  journal   = {Nat Methods},
+  author    = {Steinegger, Martin and Mirdita, Milot and Söding, Johannes},
+
   year      = {2019},
-  publisher = {Nature Publishing Group}
+  note      = {Number: 7
+               Publisher: Nature Publishing Group},
+  keywords  = {Genome assembly algorithms, Metagenomics, Protein databases, Software},
+  pages     = {603--606}
 }
 
-@article{uniprot2019uniprot,
-  title     = {UniProt: a worldwide hub of protein knowledge},
-  author    = {UniProt Consortium},
-  journal   = {Nucleic acids research},
-  volume    = {47},
-  number    = {D1},
-  pages     = {D506--D515},
-  year      = {2019},
-  publisher = {Oxford University Press}
+@article{the_uniprot_consortium_uniprot_2019,
+  title      = {{UniProt}: a worldwide hub of protein knowledge},
+  volume     = {47},
+  issn       = {0305-1048},
+  shorttitle = {{UniProt}},
+  doi        = {10.1093/nar/gky1049},
+  abstract   = {The UniProt Knowledgebase is a collection of sequences and annotations for over 120 million proteins across all branches of life. Detailed annotations extracted from the literature by expert curators have been collected for over half a million of these proteins. These annotations are supplemented by annotations provided by rule based automated systems, and those imported from other resources. In this article we describe significant updates that we have made over the last 2 years to the resource. We have greatly expanded the number of Reference Proteomes that we provide and in particular we have focussed on improving the number of viral Reference Proteomes. The UniProt website has been augmented with new data visualizations for the subcellular localization of proteins as well as their structure and interactions. UniProt resources are available under a CC-BY (4.0) license via the web at https://www.uniprot.org/.},
+  journal    = {Nucleic Acids Research},
+  author     = {{The UniProt Consortium}},
+
+  year       = {2019},
+  pages      = {D506--D515}
 }
 
-@article{hauserbioinformaticsbtw006,
-  author  = {Hauser, Maria and Steinegger, Martin and Söding, Johannes},
-  title   = {{MMseqs software suite for fast and deep clustering and searching of large protein sequence sets}},
-  journal = {Bioinformatics},
-  volume  = {32},
-  number  = {9},
-  pages   = {1323-1330},
-  year    = {2016},
-  month   = {01}
+@article{hauser_mmseqs_2016,
+  title    = {{MMseqs} software suite for fast and deep clustering and searching of large protein sequence sets},
+  volume   = {32},
+  issn     = {1367-4803},
+  doi      = {10.1093/bioinformatics/btw006},
+  abstract = {Motivation: Sequence databases are growing fast, challenging existing analysis pipelines. Reducing the redundancy of sequence databases by similarity clustering improves speed and sensitivity of iterative searches. But existing tools cannot efficiently cluster databases of the size of UniProt to 50\% maximum pairwise sequence identity or below. Furthermore, in metagenomics experiments typically large fractions of reads cannot be matched to any known sequence anymore because searching with sensitive but relatively slow tools (e.g. BLAST or HMMER3) through comprehensive databases such as UniProt is becoming too costly.Results: MMseqs (Many-against-Many sequence searching) is a software suite for fast and deep clustering and searching of large datasets, such as UniProt, or 6-frame translated metagenomics sequencing reads. MMseqs contains three core modules: a fast and sensitive prefiltering module that sums up the scores of similar k-mers between query and target sequences, an SSE2- and multi-core-parallelized local alignment module, and a clustering module.In our homology detection benchmarks, MMseqs is much more sensitive and 4–30 times faster than UBLAST and RAPsearch, respectively, although it does not reach BLAST sensitivity yet. Using its cascaded clustering workflow, MMseqs can cluster large databases down to ∼30\% sequence identity at hundreds of times the speed of BLASTclust and much deeper than CD-HIT and USEARCH. MMseqs can also update a database clustering in linear instead of quadratic time. Its much improved sensitivity-speed trade-off should make MMseqs attractive for a wide range of large-scale sequence analysis tasks.Availability and implementation: MMseqs is open-source software available under GPL at https://github.com/soedinglab/MMseqsContact:martin.steinegger@mpibpc.mpg.de, soeding@mpibpc.mpg.deSupplementary information:Supplementary data are available at Bioinformatics online.},
+  journal  = {Bioinformatics},
+  author   = {Hauser, Maria and Steinegger, Martin and Söding, Johannes},
+
+  year     = {2016},
+  pages    = {1323--1330}
 }
 
-@incollection{levi2018searching,
-  title     = {Searching the sequence read archive using Jetstream and Wrangler},
-  author    = {Levi, Kyle and Rynge, Mats and Abeysinghe, Eroma and Edwards, Robert A},
-  booktitle = {Proceedings of the practice and experience on advanced research computing},
-  pages     = {1--7},
-  year      = {2018}
+@inproceedings{levi_searching_2018,
+  address   = {New York, NY, USA},
+  series    = {{PEARC} '18},
+  title     = {Searching the {Sequence} {Read} {Archive} using {Jetstream} and {Wrangler}},
+  isbn      = {978-1-4503-6446-1},
+  doi       = {10.1145/3219104.3229278},
+  abstract  = {The Sequence Read Archive (SRA), the world's largest database of sequences, hosts approximately 10 petabases (1016 bp) of sequence data and is growing at the alarming rate of 10 TB per day. Yet this rich trove of data is inaccessible to most researchers: searching through the SRA requires large storage and computing facilities that are beyond the capacity of most laboratories. Enabling scientists to analyze existing sequence data will provide insight into ecology, medicine, and industrial applications. In this project we specifically focus on metagenomic sequences (whole community data sets from different environments). We are developing a set of tools to enable biologists to mine the metagenomes in the SRA using the NSF-funded cloud computing resources, Jetstream and Wrangler. We have developed a proof-of-principle pipeline to demonstrate the feasibility of the approach. We are leveraging our existing infrastructure to enable all scientists to access the SRA metagenomes regardless of their computational ability and are working to create a stable pipeline with a science gateway portal that is accessible to all researchers.},
+  booktitle = {Proceedings of the {Practice} and {Experience} on {Advanced} {Research} {Computing}},
+
+  author    = {Levi, Kyle and Rynge, Mats and Abeysinghe, Eroma and Edwards, Robert A.},
+
+  year      = {2018},
+  keywords  = {Apache Airavata, Bacteriophage, Credential Store, Jetstream, Metagenomics, Metagenomics Discovery Challenge, SciGaP, Search SRA, Sequence Read Archive, SRA, SRA Gateway, Wrangler},
+  pages     = {1--7}
 }
 
-@article{altschul1990basic,
-  title     = {Basic local alignment search tool},
-  author    = {Altschul, Stephen F and Gish, Warren and Miller, Webb and Myers, Eugene W and Lipman, David J},
-  journal   = {Journal of molecular biology},
-  volume    = {215},
-  number    = {3},
-  pages     = {403--410},
-  year      = {1990},
-  publisher = {Elsevier}
+@article{altschul_basic_1990,
+  title    = {Basic local alignment search tool},
+  volume   = {215},
+  issn     = {0022-2836},
+  doi      = {10.1016/S0022-2836(05)80360-2},
+  abstract = {A new approach to rapid sequence comparison, basic local alignment search tool (BLAST), directly approximates alignments that optimize a measure of local similarity, the maximal segment pair (MSP) score. Recent mathematical results on the stochastic properties of MSP scores allow an analysis of the performance of this method as well as the statistical significance of alignments it generates. The basic algorithm is simple and robust; it can be implemented in a number of ways and applied in a variety of contexts including straight-forward DNA and protein sequence database searches, motif searches, gene identification searches, and in the analysis of multiple regions of similarity in long DNA sequences. In addition to its flexibility and tractability to mathematical analysis, BLAST is an order of magnitude faster than existing sequence comparison tools of comparable sensitivity.},
+
+  journal  = {Journal of Molecular Biology},
+  author   = {Altschul, Stephen F. and Gish, Warren and Miller, Webb and Myers, Eugene W. and Lipman, David J.},
+
+  year     = {1990},
+  pages    = {403--410}
 }
 
-@article{steinegger2017mmseqs2,
-  title     = {MMseqs2 enables sensitive protein sequence searching for the analysis of massive data sets},
-  author    = {Steinegger, Martin and S{\"o}ding, Johannes},
-  journal   = {Nature biotechnology},
+@article{steinegger_mmseqs2_2017,
+  title     = {{MMseqs2} enables sensitive protein sequence searching for the analysis of massive data sets},
   volume    = {35},
-  number    = {11},
-  pages     = {1026--1028},
+  copyright = {2017 Nature Publishing Group, a division of Macmillan Publishers Limited. All Rights Reserved.},
+  issn      = {1546-1696},
+  doi       = {10.1038/nbt.3988},
+
+  journal   = {Nat Biotechnol},
+  author    = {Steinegger, Martin and Söding, Johannes},
+
   year      = {2017},
-  publisher = {Nature Publishing Group}
+  note      = {Number: 11
+               Publisher: Nature Publishing Group},
+  keywords  = {Environmental microbiology, Functional clustering, Sequence annotation, Software},
+  pages     = {1026--1028}
 }
 
-@article{buchfink2015fast,
-  title     = {Fast and sensitive protein alignment using DIAMOND},
-  author    = {Buchfink, Benjamin and Xie, Chao and Huson, Daniel H},
-  journal   = {Nature methods},
+@article{buchfink_fast_2015,
+  title     = {Fast and sensitive protein alignment using {DIAMOND}},
   volume    = {12},
-  number    = {1},
-  pages     = {59--60},
+  copyright = {2014 Nature Publishing Group, a division of Macmillan Publishers Limited. All Rights Reserved.},
+  issn      = {1548-7105},
+  doi       = {10.1038/nmeth.3176},
+  abstract  = {The open-source DIAMOND software provides protein alignment that is 20,000 times faster on short reads than BLASTX at similar sensitivity, for rapid analysis of large metagenomics data sets on a desktop computer.},
+
+  journal   = {Nat Methods},
+  author    = {Buchfink, Benjamin and Xie, Chao and Huson, Daniel H.},
+
   year      = {2015},
-  publisher = {Nature Publishing Group}
+  note      = {Number: 1
+               Publisher: Nature Publishing Group},
+  keywords  = {Software},
+  pages     = {59--60}
 }
 
-@article{bradley2019ultrafast,
+@article{bradley_ultrafast_2019,
   title     = {Ultrafast search of all deposited bacterial and viral genomic data},
-  author    = {Bradley, Phelim and Den Bakker, Henk C and Rocha, Eduardo PC and McVean, Gil and Iqbal, Zamin},
-  journal   = {Nature biotechnology},
   volume    = {37},
-  number    = {2},
-  pages     = {152--159},
+  copyright = {2019 The Author(s), under exclusive licence to Springer Nature America, Inc.},
+  issn      = {1546-1696},
+  doi       = {10.1038/s41587-018-0010-1},
+  abstract  = {Exponentially increasing amounts of unprocessed bacterial and viral genomic sequence data are stored in the global archives. The ability to query these data for sequence search terms would facilitate both basic research and applications such as real-time genomic epidemiology and surveillance. However, this is not possible with current methods. To solve this problem, we combine knowledge of microbial population genomics with computational methods devised for web search to produce a searchable data structure named BItsliced Genomic Signature Index (BIGSI). We indexed the entire global corpus of 447,833 bacterial and viral whole-genome sequence datasets using four orders of magnitude less storage than previous methods. We applied our BIGSI search function to rapidly find resistance genes MCR-1, MCR-2, and MCR-3, determine the host-range of 2,827 plasmids, and quantify antibiotic resistance in archived datasets. Our index can grow incrementally as new (unprocessed or assembled) sequence datasets are deposited and can scale to millions of datasets.},
+
+  journal   = {Nat Biotechnol},
+  author    = {Bradley, Phelim and den Bakker, Henk C. and Rocha, Eduardo P. C. and McVean, Gil and Iqbal, Zamin},
+
   year      = {2019},
-  publisher = {Nature Publishing Group}
+  note      = {Number: 2
+               Publisher: Nature Publishing Group},
+  keywords  = {Computational platforms and environments, Data mining, Infectious-disease diagnostics, Microbial genetics, Software},
+  pages     = {152--159}
 }
 
-@article{henikoff1992amino,
-  title     = {Amino acid substitution matrices from protein blocks},
-  author    = {Henikoff, Steven and Henikoff, Jorja G},
-  journal   = {Proceedings of the National Academy of Sciences},
-  volume    = {89},
-  number    = {22},
-  pages     = {10915--10919},
-  year      = {1992},
-  publisher = {National Acad Sciences}
+@article{henikoff_amino_1992,
+  title   = {Amino acid substitution matrices from protein blocks.},
+  volume  = {89},
+  doi     = {10.1073/pnas.89.22.10915},
+  journal = {Proceedings of the National Academy of Sciences},
+  author  = {Henikoff, S and Henikoff, J G},
+
+  year    = {1992},
+  note    = {Publisher: Proceedings of the National Academy of Sciences},
+  pages   = {10915--10919}
+}
+
+@article{tumescheit_cialign_2022,
+  title      = {{CIAlign}: {A} highly customisable command line tool to clean, interpret and visualise multiple sequence alignments},
+  volume     = {10},
+  issn       = {2167-8359},
+  shorttitle = {{CIAlign}},
+  doi        = {10.7717/peerj.12983},
+  abstract   = {Background Throughout biology, multiple sequence alignments (MSAs) form the basis of much investigation into biological features and relationships. These alignments are at the heart of many bioinformatics analyses. However, sequences in MSAs are often incomplete or very divergent, which can lead to poor alignment and large gaps. This slows down computation and can impact conclusions without being biologically relevant. Cleaning the alignment by removing common issues such as gaps, divergent sequences, large insertions and deletions and poorly aligned sequence ends can substantially improve analyses. Manual editing of MSAs is very widespread but is time-consuming and difficult to reproduce. Results We present a comprehensive, user-friendly MSA trimming tool with multiple visualisation options. Our highly customisable command line tool aims to give intervention power to the user by offering various options, and outputs graphical representations of the alignment before and after processing to give the user a clear overview of what has been removed. The main functionalities of the tool include removing regions of low coverage due to insertions, removing gaps, cropping poorly aligned sequence ends and removing sequences that are too divergent or too short. The thresholds for each function can be specified by the user and parameters can be adjusted to each individual MSA. CIAlign is designed with an emphasis on solving specific and common alignment problems and on providing transparency to the user. Conclusion CIAlign effectively removes problematic regions and sequences from MSAs and provides novel visualisation options. This tool can be used to fine-tune alignments for further analysis and processing. The tool is aimed at anyone who wishes to automatically clean up parts of an MSA and those requiring a new, accessible way of visualising large MSAs.},
+
+  journal    = {PeerJ},
+  author     = {Tumescheit, Charlotte and Firth, Andrew E. and Brown, Katherine},
+
+  year       = {2022},
+  note       = {Publisher: PeerJ Inc.},
+  pages      = {e12983}
+}
+
+@article{katoh_mafft_2013,
+  title      = {{MAFFT} {Multiple} {Sequence} {Alignment} {Software} {Version} 7: {Improvements} in {Performance} and {Usability}},
+  volume     = {30},
+  issn       = {0737-4038},
+  shorttitle = {{MAFFT} {Multiple} {Sequence} {Alignment} {Software} {Version} 7},
+  doi        = {10.1093/molbev/mst010},
+  abstract   = {We report a major update of the MAFFT multiple sequence alignment program. This version has several new features, including options for adding unaligned sequences into an existing alignment, adjustment of direction in nucleotide alignment, constrained alignment and parallel processing, which were implemented after the previous major update. This report shows actual examples to explain how these features work, alone and in combination. Some examples incorrectly aligned by MAFFT are also shown to clarify its limitations. We discuss how to avoid misalignments, and our ongoing efforts to overcome such limitations.},
+  journal    = {Molecular Biology and Evolution},
+  author     = {Katoh, Kazutaka and Standley, Daron M.},
+
+  year       = {2013},
+  pages      = {772--780}
+}
+
+@article{mirdita_colabfold_2022,
+  title      = {{ColabFold}: making protein folding accessible to all},
+  copyright  = {2022 The Author(s)},
+  issn       = {1548-7105},
+  shorttitle = {{ColabFold}},
+  doi        = {10.1038/s41592-022-01488-1},
+  abstract   = {ColabFold offers accelerated prediction of protein structures and complexes by combining the fast homology search of MMseqs2 with AlphaFold2 or RoseTTAFold. ColabFold’s 40−60-fold faster search and optimized model utilization enables prediction of close to 1,000 structures per day on a server with one graphics processing unit. Coupled with Google Colaboratory, ColabFold becomes a free and accessible platform for protein folding. ColabFold is open-source software available at https://github.com/sokrypton/ColabFoldand its novel environmental databases are available at https://colabfold.mmseqs.com.},
+
+  journal    = {Nat Methods},
+  author     = {Mirdita, Milot and Schütze, Konstantin and Moriwaki, Yoshitaka and Heo, Lim and Ovchinnikov, Sergey and Steinegger, Martin},
+
+  year       = {2022},
+  note       = {Publisher: Nature Publishing Group},
+  keywords   = {Computational models, Protein databases, Protein structure predictions, Software},
+  pages      = {1--4}
+}
+
+@article{ozcan_programmable_2021,
+  title     = {Programmable {RNA} targeting with the single-protein {CRISPR} effector {Cas7}-11},
+  volume    = {597},
+  copyright = {2021 The Author(s), under exclusive licence to Springer Nature Limited},
+  issn      = {1476-4687},
+  doi       = {10.1038/s41586-021-03886-5},
+  abstract  = {CRISPR–Cas interference is mediated by Cas effector nucleases that are either components of multisubunit complexes—in class 1 CRISPR–Cas systems—or domains of a single protein—in class 2 systems1–3. Here we show that the subtype III-E effector Cas7-11 is a single-protein effector in the class 1 CRISPR–Cas systems originating from the fusion of a putative Cas11 domain and multiple Cas7 subunits that are derived from subtype III-D. Cas7-11 from Desulfonema ishimotonii (DiCas7-11), when expressed in Escherichia coli, has substantial RNA interference effectivity against mRNAs and bacteriophages. Similar to many class 2 effectors—and unique among class 1 systems—DiCas7-11 processes pre-CRISPR RNA into mature CRISPR RNA (crRNA) and cleaves RNA at positions defined by the target:spacer duplex, without detectable non-specific activity. We engineered Cas7-11 for RNA knockdown and editing in mammalian cells. We show that Cas7-11 has no effects on cell viability, whereas other RNA-targeting tools (such as short hairpin RNAs and Cas13) show substantial cell toxicity4,5. This study illustrates the evolution of a single-protein effector from multisubunit class 1 effector complexes, expanding our understanding of the diversity of CRISPR systems. Cas7-11 provides the basis for new programmable RNA-targeting tools that are free of collateral activity and cell toxicity.},
+
+  journal   = {Nature},
+  author    = {Özcan, Ahsen and Krajeski, Rohan and Ioannidi, Eleonora and Lee, Brennan and Gardner, Apolonia and Makarova, Kira S. and Koonin, Eugene V. and Abudayyeh, Omar O. and Gootenberg, Jonathan S.},
+
+  year      = {2021},
+  note      = {Number: 7878
+               Publisher: Nature Publishing Group},
+  keywords  = {Biotechnology, Microbiology, Molecular biology},
+  pages     = {720--725}
 }

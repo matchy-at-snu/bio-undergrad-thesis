@@ -6,23 +6,30 @@
 
 % 리뷰 논문의 경우 본 리뷰를 통해 얻은 주제의 현재와 앞으로의 전망 또는 연구 방향을 자유롭게 제시한다.
 
-In this chapter we applied \texttt{Petasearch} to conduct two explorative analyses to show the effectiveness of the algorithm. Since \texttt{Petasearch} is capable of dealing with enormous datasets, we collected a large number of protein sequences including the ones assembled and compiled by the Serratus team %\cite{}
-and the colabfold team %\cite{}.
-In the meantime, we also self-assembled terabyte-scale metagenomic data using PLASS \cite{steinegger2019plass}. In combination with the forementioned SRC and MERC data, we collected a total of nearly 10TB protein sequences. We then ran \texttt{Petasearch} on the collected data to search for \textbf{(1)} new short candidates of Cas 7-11 enzymes and \textbf{(2)} homologs for rare RNA virus protein with no known homologs in existing databases. The results of the two analyses were shown in \cref{section:find-new-candidates-of-cas-7-11-enzymes} and \cref{section:discover-homologs-for-rare-rna-virus-protein}.
+In this chapter we applied \texttt{Petasearch} to conduct two explorative analyses to show the effectiveness of the algorithm. Since \texttt{Petasearch} is capable of dealing with enormous datasets, we collected a large number of protein sequences including the ones assembled and compiled by the Serratus team \cite{edgar_petabase-scale_2022}
+and the colabfold team \cite{mirdita_colabfold_2022}.
+In the meantime, we also self-assembled terabyte-scale metagenomic data using PLASS \cite{steinegger_protein-level_2019}. In combination with the forementioned SRC and MERC data, we collected a total of nearly 10TB protein sequences. We then ran \texttt{Petasearch} on the collected data to search for \textbf{(1)} new short candidates of Cas 7-11 enzymes and \textbf{(2)} homologs for rare RNA virus protein with no known homologs in existing databases. The results of the two analyses were shown in \cref{section:find-new-candidates-of-cas-7-11-enzymes} and \cref{section:discover-homologs-for-rare-rna-virus-protein}.
 
 \section{Find new candidates of Cas 7-11 enzymes} \label{section:find-new-candidates-of-cas-7-11-enzymes}
 
-The CRISPR-Cas system is a powerful gene editing tool medidated by the Cas effector nucleases. Cas7-11 is a very short single-protein effector in class 1 CRISPR-Cas systems, thus showing almost no collateral activity and cell toxicity %\cite{}
-We used \texttt{Petasearch} to search the Cas 7-11 MSA in %\cite{}
+The CRISPR-Cas system is a powerful gene editing tool medidated by the Cas effector nucleases. Cas7-11 is a very short single-protein effector in class 1 CRISPR-Cas systems, thus showing almost no collateral activity and cell toxicity \cite{ozcan_programmable_2021}
+We used \texttt{Petasearch} to search the Cas 7-11 MSA in \cite{ozcan_programmable_2021}
 for new shorter candidates of Cas 7-11 enzymes in the collected data.
 
-As a result, a total of 4484 valid Cas enzymes with at least one annotated putative catalytic domain were found. Amongst these, 250 even shorter (< 1500 amino acids long) sequences were found. The total searching time was no more than 10 minutes. The Multiple Sequence Alignment (MSA) of the 250 short candidates were generated using \texttt{maffft} and visualized usng \texttt{CIAlign} in \cref{fig:cas7-11-candidate-MSA}. Those candidates could serve as a basis for future programmable editing tools.
+As a result, a total of 4484 valid Cas enzymes with at least one annotated putative catalytic domain were found. Amongst these, 250 even shorter (< 1500 amino acids long) sequences were found. The total searching time was no more than 10 minutes. The Multiple Sequence Alignment (MSA) of the 250 short candidates were generated using \texttt{mafft} \cite{katoh_mafft_2013} and visualized usng \texttt{CIAlign} \cite{tumescheit_cialign_2022} in \cref{fig:cas7-11-candidate-MSA}. Those candidates could serve as a basis for future programmable editing tools.
 
 \section{Discover homologs for rare RNA viral protein} \label{section:discover-homologs-for-rare-rna-virus-protein}
 
-We searched the collected data with 6 RNA-dependent RNA polymerases (RdRPs) from different RNA viruses. There were no known homologs found in previously established databases for those RdRPs. Using \texttt{Petasearch}, we found at least 40 homologs each except for one RdRP which is only 100 amino acid long (visualized in \autoref{fig:rna-virus-hits}). The total amount of search time was no more than 8 minutes. The MSAs for each virus were visualized in \autoref{fig:virus-msas}.
+We searched the collected data with 6 RNA-dependent RNA polymerases (RdRPs) from different RNA viruses. There were no known homologs found in previously established databases for those RdRPs. Using \texttt{Petasearch}, we found at least 40 homologs each except for one RdRP which is only 100 amino acid long (visualized in \autoref{fig:rna-virus-hits}). The total amount of search time was no more than 8 minutes. The MSAs for each virus were visualized in \autoref{fig:virus-msas}. Finding homologs for those rare RdRPs will enable structure predictors like AlphaFold2 to provide more accurate structure predictions and improve our understanding to them.
 
-Finding homologs for those rare RdRPs will enable structure predictors like AlphaFold2 to provide more accurate structure predictions and improve our understanding to them.
+\pagebreak
+\begin{figpage}
+  \begin{figure}
+    \centering
+
+  \end{figure}
+\end{figpage}
+\pagebreak
 
 \section{Conclusion and future work} \label{section:conclusion-and-future-work}
 

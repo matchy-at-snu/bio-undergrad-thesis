@@ -20,7 +20,7 @@ The algorithm contains the following three stages:
         The first one contains the unique k-mers, the second one contains the corresponding sequence ID in the database.
         Instead of storing the k-mers as strings, we first converted the k-mers their numeric representations, and then sorted them.
         To further decrease the required amount of storage, we implemented a diff-index to store only the difference between k-mers, which is compressed using a creative bit-squeezing technique (described in \cref{section:diff-index_compression}), resulting in mostly 2 bytes of memory instead of 8 bytes per k-mer.
-  \item \textbf{Prefiltering phase}: In the second step, we first create a query table for the input query sequence or profile database, extract all the k-mers inside and generate similar k-mers using either BLOSUM \cite{henikoff1992amino} matrices or the profile substitution matrix.
+  \item \textbf{Prefiltering phase}: In the second step, we first create a query table for the input query sequence or profile database, extract all the k-mers inside and generate similar k-mers using either BLOSUM \cite{henikoff_amino_1992} matrices or the profile substitution matrix.
         We then perform a linear read and comparison between the query and target k-mers to find all the double k-mer matches. Such linear reading of the database is friendly to the caching and prefetch infrastructure of modern CPUs and modern NVMe SSDs.
         To maximize the huge NVMe linear read throughput, we also exploit advanced Linux IO techniques (described in \cref{section:io-performance}).
         After the comparison finishes, we sort the result and remove all entries where we have fewer than two hits for a target sequence from one query sequence to reduce random hits.
@@ -144,8 +144,8 @@ In this section, we will introduce several techniques to further boost the speed
 \subsection{IO Performance Optimization} \label{section:io-performance}
 
 In the prototypical \texttt{Petasearch} implementation, \texttt{mmap} was selected for reading \texttt{Petasearch} data structures stored on NVMe SSDs.
-However, \texttt{mmap} does not scale well with the increase in threads \cite{papagiannis2020optimizing} and thus cannot saturate the full throughput of NVMe SSDs.
-To find the IO tool with the best performance, we conducted a benchmarking study on the performance of various IO tools using FIO benchmark software \cite{AxboeFlexibleIOTester2022}.
+However, \texttt{mmap} does not scale well with the increase in threads \cite{papagiannis_optimizing_2020} and thus cannot saturate the full throughput of NVMe SSDs.
+To find the IO tool with the best performance, we conducted a benchmarking study on the performance of various IO tools using FIO benchmark software \cite{axboe_flexible_2022}.
 For synced IO tools, we benchmarked \texttt{pread} using different flags and \texttt{mmap}.
 For async IO tools, we benchmarked \texttt{libaio} and \texttt{posix\_aio}.
 
@@ -170,8 +170,8 @@ The simple yet efficient chagne not only reduce the IO overhead, but also dereas
 \subsection{Fast Third-Party Libraries}
 
 We integrated several fast thrid-party libraries to replace the slow implementaions in \texttt{Petaserch} prototype.
-The fast parallel in-place sorting algorithm $IPS^4o$ \cite{axtmann2017place} was integrated to replace the slow \texttt{std::sort}.
-The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} \cite{liu2021block} was used to allow fast pairwise alignment in the third phase.
+The fast parallel in-place sorting algorithm $IPS^4o$ \cite{axtmann_engineering_2022} was integrated to replace the slow \texttt{std::sort}.
+The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} \cite{liu_block_2021} was used to allow fast pairwise alignment in the third phase.
 
 \pagebreak
 \begin{figpage}
@@ -208,9 +208,9 @@ The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} \cite{liu2021bloc
 The k-mer matching mechanism limits \texttt{Petasearch}'s ability of finding homologs for low sequence identity.
 To improve \texttt{Petasearch}'s performance at lower sequence identity, we made \texttt{Petasearch} able to perform profile search by allowing profile databases as inputs.
 
-Profile search is using a "sequence profile" generated from multiple sequence alignment (MSA) results as the querying input \cite{steinegger2019hh}.
+Profile search is using a "sequence profile" generated from multiple sequence alignment (MSA) results as the querying input \cite{steinegger_hh-suite3_2019}.
 The profile Hidden Markov Model (HMM) provides position-specific aminoaid insertion, deleletion and substitution penalties \cite{steinegger2019hh}, which significantly increase the searching sensitivity.
-The most sensitive searching tools such as \texttt{HMMER} \cite{eddy2009new}, \cite{eddy2011accelerated}, \texttt{HHblits} \cite{remmert2012hhblits} and \texttt{HH-suite3} \cite{steinegger2019hh} all use the profile search mechanism.
+The most sensitive searching tools such as \texttt{HMMER} \cite{eddy_new_2009}, \cite{eddy_accelerated_2011}, \texttt{HHblits} \cite{remmert_hhblits_2012} and \texttt{HH-suite3} \cite{steinegger_hh-suite3_2019} all use the profile search mechanism.
 Thus, enabling \texttt{Petasearch} to perform profile search is expected to improve its sensitivity at low sequence identity.
 
 \section{Benchmarks} \label{section:benchmarks}
@@ -222,7 +222,7 @@ We performed all the benchmarks on a server with AMD EPYC 7702P (128) @ 2.000GHz
 
 In the time benchmark we measured the time that \texttt{Petasearch}, fast \texttt{MMseqs2} search with default parameters and \texttt{DIAMOND} search with both query-index mode (fast) and double-index mode (default) to search a small query set of 2.9 MB against a 9.3 TB large target set.
 \texttt{Petasearch} was only conducted using 9-mers due to space limitation.
-We used the original 456 GB data of Soil Reference Catalog (SRC) and Marine Eukaryotic Reference Catalog (MERC) \cite{steinegger2019plass} and duplicated several copies of them until we filled twenty NVMe disks fully with the sequence databases and \texttt{Petasearch} tables.
+We used the original 456 GB data of Soil Reference Catalog (SRC) and Marine Eukaryotic Reference Catalog (MERC) \cite{steinegger_protein-level_2019} and duplicated several copies of them until we filled twenty NVMe disks fully with the sequence databases and \texttt{Petasearch} tables.
 As a result, each NVMe roughly contains seven to eight 70GB databases.
 We ran \texttt{Petasearch} algorithm ten times and
 report the average run-time to avoid deviations.
@@ -239,7 +239,7 @@ We downloaded the \textit{UniProt} database and randomly extracted one million e
 For each cluster, we randomly selected 5\% of the sequences as query database, and the remaining 95\% as target database.
 For each sequence in every databases, we tagged the sequence with its domain information by using \texttt{MMseqs2} to search the "scop25 dbset" described by Hauser et.
 al.
-\cite{hauserbioinformaticsbtw006} against both query database and target database.
+\cite{hauser_mmseqs_2016} against both query database and target database.
 The sequence without any SCOP domain was filtered out.
 For all other sequences in the query databases, we reversed the region that is not the SCOP25 domain; for target sequences, we shuffled those regions randomly.
 In this way, we can use the domain information to identify false positive hits.
