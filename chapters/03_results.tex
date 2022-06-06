@@ -13,15 +13,15 @@ For gigabyte-sized database, the compression efficiency is even higher -- a 82.1
 
 \section{Speed Benchmark}
 
-Because of space limitation, the detailed effect of each optimization was omitted. Instead we present the results of speed benchmark in \autoref{tab:time_benchmark} with all optimizations applied. The results were also visualized in visualized in \autoref{fig:speed} to give the readers an intuitive impression of how fast the algorithm is. It is noteworthy that in the benchmark for \texttt{Petasearch} prototype, the searching time for a 450GB target set was already 15m49s without generating similar k-mers.
+Because of space limitation, the detailed effect of each optimization was omitted. Instead we present the results of speed benchmark in \autoref{tab:time_benchmark} with all optimizations applied. The results were also visualized in visualized in \autoref{fig:speed} to give the readers an intuitive impression of how fast the algorithm is. It is noteworthy that in the benchmark for \texttt{Petasearch} prototype, the searching time for a 456GB target set was already 15m 49s without generating similar k-mers. Using the same algorithm with the same parameters, the searching time for a 456GB target set is currently only 3m32s, suggesting that the algorithm is now 5 times faster than the prototypical implementation.
 
 \section{Sensitivity Benchmark}
 
-We visualized the sensitivity benchmark in \autoref{fig:sensitivity}. It is confirmed that \texttt{Petasearch} worked as expected as it found a similar number of high sequence identity hits to other methods. The performance is comparable up to $60\%$ sequence identity.
+We visualized the sensitivity benchmark in \autoref{fig:sensitivity}. It is confirmed that \texttt{Petasearch} worked as expected as it found a similar number of high sequence identity hits to other methods. The performance is comparable up to $60\%$ sequence identity. Moreover, it is also clearly shown that \texttt{Petasearch}'s profile search mode have similar performance as \texttt{MMseqs2}'s profile search, enabling \texttt{Petasearch} to capture true positive hits at sequence identity as low as $40\%$. The integration of profile search function is proved to be successful, bringing the applicability of \texttt{Petasearch} to a new level.
 
 \pagebreak
 \begin{figpage}
-  \newgeometry{left=8mm, right=10mm}
+  \newgeometry{left=8mm, right=10mm, top=20mm}
   \captionsetup[figure]{width=.9\linewidth}
   \captionsetup[subfigure]{
     width=.9\linewidth
@@ -60,7 +60,8 @@ We visualized the sensitivity benchmark in \autoref{fig:sensitivity}. It is conf
       \caption{The amount of space reduction for a 82.1 GB database. The space saving is even higher than smaller databases, reaching $43.65\%$.}
       \label{fig:seqdbsize_large}
     \end{subfigure}
-    \caption{\textbf{Effect of \texttt{ASCII}-squeezing method and simplified database index.} We also briefly test the effect of the compression efficiency with respect to the size of the database.}
+    \caption{\textbf{Effect of \texttt{ASCII}-squeezing method and simplified database index.} We also briefly test the effect of the compression efficiency with respect to the size of the database. The reduction of the indexing overhead is more conspicuous for larger databases.
+    If compared with the original \texttt{FASTA} files, the space saving is steadily around $15\%$.}
     \label{fig:ascii-squeezing}
   \end{figure}
   \restoregeometry
@@ -111,7 +112,7 @@ We visualized the sensitivity benchmark in \autoref{fig:sensitivity}. It is conf
     \caption{\textbf{Results of the time benchmark using \texttt{Petasearch}, \texttt{MMseqs2} and \texttt{DIAMOND}.}
       We searched a 2MB query set against a 9.3TB target set (size of the \texttt{FASTA} file including the headers). We prepared a total of 146 target database chunks distributed across 21 NVMe SSDs, 11 of which have 6 chunks and 10 of which have 8 chunks.
       The size of the chunks are evenly distributed. For \texttt{Petasearch}, we repeated the benchmark 10 times to get an average time.
-      For \texttt{MMseqs2} and \texttt{DIAMOD}, they were only run once since the time for a full round of search is too long. The parameters and the corresponding explanation of the parameters used in the benchmark were given in the fourth and fifth columns of the table.}
+      For \texttt{MMseqs2} and \texttt{DIAMOND}, they were only run once since the time for a full round of search is too long. The parameters and the corresponding explanation of the parameters used in the benchmark were given in the fourth and fifth columns of the table.}
     \label{tab:time_benchmark}
   \end{table}
   \restoregeometry
@@ -122,21 +123,10 @@ We visualized the sensitivity benchmark in \autoref{fig:sensitivity}. It is conf
   \newgeometry{left=8mm, right=8mm}
   \captionsetup[figure]{width=.8\linewidth}
   \begin{figure}
-    \begin{subfigure}{0.5\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{images/overallHits.pdf}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{images/totalTP.pdf}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-      \includegraphics[width=\textwidth]{images/percTP.pdf}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-      \includegraphics[width=\textwidth]{images/percFP.pdf}
-    \end{subfigure}
-    \caption{\textbf{Results of the sensitivity benchmark.}}
+    \centering
+    \includegraphics[width=\textwidth]{images/everything.pdf}
+    \caption{\textbf{Results of the sensitivity benchmark.} The upper left figure shows the overall hits, the upper right figure shows the total number of true positive hits, the lower left figure shows the true positive rate and the lower right figure shows the false positive rate, each distributed across seven sequence identity buckets. It is clear that the sensitivity of \texttt{Petasearch} is comparable to the state-of-the-art algorithms in sequence identity buckets. For lower sequence identity buckets, the newly added profile search function can compensate for the loss of sensitivity.}
+    \label{fig:sensitivity}
   \end{figure}
   \restoregeometry
 \end{figpage}
