@@ -222,7 +222,7 @@ We performed all the benchmarks on a server with AMD EPYC 7702P (128) @ 2.000GHz
 
 In the time benchmark we measured the time that \texttt{Petasearch}, fast \texttt{MMseqs2} search with default parameters and \texttt{DIAMOND} search with both query-index mode (fast) and double-index mode (default) to search a small query set of 2.9 MB against a 9.3 TB large target set.
 \texttt{Petasearch} was only conducted using 9-mers due to space limitation.
-We used the original 456 GB data of Soil Reference Catalog and Marine Eukaryotic Reference Catalog and duplicated several copies of them until we filled twenty NVMe disks fully with the sequence databases and \texttt{Petasearch} tables.
+We used the original 456 GB data of Soil Reference Catalog (SRC) and Marine Eukaryotic Reference Catalog (MERC) \cite{steinegger2019plass} and duplicated several copies of them until we filled twenty NVMe disks fully with the sequence databases and \texttt{Petasearch} tables.
 As a result, each NVMe roughly contains seven to eight 70GB databases.
 We ran \texttt{Petasearch} algorithm ten times and
 report the average run-time to avoid deviations.
