@@ -30,15 +30,15 @@ The algorithm contains the following three stages:
 
 The contributions of the author were detailed in \cref{section:space-optimization}, \cref{section:speed-optimization} and \cref{section:sensitivity-improvement}.
 
-\begin{figpage}
-  \begin{figure}
-    \includegraphics[width=\textwidth]{images/overview.pdf}
-    \caption{
-      \textbf{General overview of the Petasearch steps.} The preparation step, which will utilize the \texttt{convert2sradb()} and \texttt{createkmertable()} functions, creates the target tables that store all unique k-mers for each database. The pre-filtering step, which is implemented in \texttt{compare2kmertables()} consists of a highly parallelized double index search that streams the target tables directly from different solid state devices (SSDs) to saturate their maximum possible read rates and avoid random memory accesses. Requiring duplicate k-mer matches for each query-target sequence pair reduces the possibility of random hits and increases the specificity of the hits. An alignment for a query-target sequence pair is computed if the distance between diagonals for at least one k-mer pair is less than four. This constraint removes sequence pairs where the positions of the matching k-mers are not close and therefore a good alignment is unlikely. The alignment phase is realized in function \texttt{computeAlignment()} and the alignment output is possible to be converted into popular output formats such as the \texttt{BLAST -m 8} format.
-    }
-    \label{fig:overview}
-  \end{figure}
-\end{figpage}
+% \begin{figpage}
+%   \begin{figure}
+%     \includegraphics[width=\textwidth]{images/overview.pdf}
+%     \caption{
+%       \textbf{General overview of the Petasearch steps.} The preparation step, which will utilize the \texttt{convert2sradb()} and \texttt{createkmertable()} functions, creates the target tables that store all unique k-mers for each database. The pre-filtering step, which is implemented in \texttt{compare2kmertables()} consists of a highly parallelized double index search that streams the target tables directly from different solid state devices (SSDs) to saturate their maximum possible read rates and avoid random memory accesses. Requiring duplicate k-mer matches for each query-target sequence pair reduces the possibility of random hits and increases the specificity of the hits. An alignment for a query-target sequence pair is computed if the distance between diagonals for at least one k-mer pair is less than four. This constraint removes sequence pairs where the positions of the matching k-mers are not close and therefore a good alignment is unlikely. The alignment phase is realized in function \texttt{computeAlignment()} and the alignment output is possible to be converted into popular output formats such as the \texttt{BLAST -m 8} format.
+%     }
+%     \label{fig:overview}
+%   \end{figure}
+% \end{figpage}
 
 \section{Space Optimization} \label{section:space-optimization}
 
@@ -205,7 +205,7 @@ The banded Smith-Waterman-Gotoh aligner \texttt{block-aligner} \cite{liu_block_2
 The k-mer matching mechanism limits \texttt{Petasearch}'s ability of finding homologs for low sequence identity.
 To improve \texttt{Petasearch}'s performance at lower sequence identity, we made \texttt{Petasearch} able to perform profile search by allowing profile databases as inputs.
 
-Profile search is using a "sequence profile" generated from multiple sequence alignment (MSA) results as the querying input \cite{steinegger_hh-suite3_2019}.
+Profile search is using a ``sequence profile'' generated from multiple sequence alignment (MSA) results as the querying input \cite{steinegger_hh-suite3_2019}.
 The profile Hidden Markov Model (HMM) provides position-specific aminoaid insertion, deleletion and substitution penalties \cite{steinegger2019hh}, which significantly increase the searching sensitivity.
 The most sensitive searching tools such as \texttt{HMMER} \cite{eddy_new_2009}, \cite{eddy_accelerated_2011}, \texttt{HHblits} \cite{remmert_hhblits_2012} and \texttt{HH-suite3} \cite{steinegger_hh-suite3_2019} all use the profile search mechanism.
 Thus, enabling \texttt{Petasearch} to perform profile search is expected to improve its sensitivity at low sequence identity.
@@ -234,7 +234,7 @@ The main goal of this benchmark is to show that \texttt{Petasearch} is able to c
 
 We downloaded the \textit{UniProt} database and randomly extracted one million entries and clustered them to $0.9$, $0.8$, $0.7$, $0.6$, $0.5$ and $0.4$ percent sequence identity using \texttt{MMseqs2}'s clustering workflow.
 For each cluster, we randomly selected 5\% of the sequences as query database, and the remaining 95\% as target database.
-For each sequence in every databases, we tagged the sequence with its domain information by using \texttt{MMseqs2} to search the "scop25 dbset" described by Hauser et.
+For each sequence in every databases, we tagged the sequence with its domain information by using \texttt{MMseqs2} to search the ``scop25 dbset'' described by Hauser et.
 al.
 \cite{hauser_mmseqs_2016} against both query database and target database.
 The sequence without any SCOP domain was filtered out.
